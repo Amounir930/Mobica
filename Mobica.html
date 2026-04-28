@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Job Analysis Form | استمارة تحليل وظيفي</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600&family=Cairo:wght@300;400;500;600;700&display=swap');
+:root {
+  --navy:#0F2235;--navy-2:#1A3148;--navy-3:#243D56;
+  --gold:#C8A45A;--gold-2:#E2C07E;--gold-dim:rgba(200,164,90,0.12);
+  --teal:#1A8A7A;--teal-2:#22A090;--teal-dim:rgba(26,138,122,0.10);
+  --white:#FFFFFF;--gray-50:#F8F7F4;--gray-100:#F0EEE9;
+  --gray-200:#E3E0D8;--gray-300:#C4C0B6;--gray-500:#7C7870;--gray-700:#3C3A35;
+  --red:#D63B3B;--red-dim:rgba(214,59,59,0.09);
+  --orange:#D97706;--orange-dim:rgba(217,119,6,0.10);
+  --radius:12px;--radius-sm:7px;--radius-xs:4px;
+  --shadow:0 2px 16px rgba(0,0,0,0.07);--shadow-lg:0 6px 32px rgba(0,0,0,0.11);
+  --trans:all 0.22s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--gray-50);color:var(--gray-700);line-height:1.6;min-height:100vh;}
+body.lang-ar{font-family:'Cairo',sans-serif;}
+#langScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);position:relative;overflow:hidden;}
+#langScreen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(200,164,90,.07),transparent 55%),radial-gradient(ellipse at 20% 80%,rgba(26,138,122,.05),transparent 50%);}
+.lang-card{position:relative;z-index:1;background:var(--navy-2);border:1px solid rgba(200,164,90,.2);border-radius:20px;padding:52px 48px;text-align:center;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.lang-title-en{font-family:'Playfair Display',serif;font-size:22px;color:var(--white);margin-bottom:4px;}
+.lang-title-ar{font-family:'Cairo',sans-serif;font-size:20px;color:var(--gold-2);margin-bottom:20px;font-weight:500;}
+.lang-intro{font-size:13px;color:var(--gray-300);line-height:1.7;margin-bottom:10px;text-align:center;}
+.lang-subtitle{font-size:13px;color:var(--gray-300);margin-bottom:36px;line-height:1.6;}
+.lang-btns{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.lang-btn{padding:16px 20px;border-radius:var(--radius);border:2px solid rgba(200,164,90,.3);background:var(--navy-3);color:var(--white);cursor:pointer;transition:var(--trans);font-size:15px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.lang-btn:hover{border-color:var(--gold);background:var(--gold-dim);transform:translateY(-2px);}
+.lang-flag{font-size:28px;}
+.lang-name-main{font-size:15px;color:var(--gold-2);}
+.lang-name-sub{font-size:11px;color:var(--gray-300);font-weight:400;}
+#workflowScreen{display:none;}
+.workflow-wrap{max-width:860px;margin:0 auto;padding:40px 20px 60px;}
+.workflow-header{text-align:center;margin-bottom:48px;}
+.workflow-header h2{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);margin-bottom:8px;}
+.workflow-header p{font-size:14px;color:var(--gray-500);}
+.workflow-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;position:relative;}
+.workflow-steps::before{content:'';position:absolute;top:52px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal));z-index:0;}
+@media(max-width:680px){.workflow-steps{grid-template-columns:1fr 1fr;}.workflow-steps::before{display:none;}}
+.wf-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 20px 22px;text-align:center;position:relative;z-index:1;border-top:3px solid transparent;transition:var(--trans);}
+.wf-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+.wf-card:nth-child(1){border-top-color:var(--gold);}
+.wf-card:nth-child(2){border-top-color:var(--teal);}
+.wf-card:nth-child(3){border-top-color:#7F77DD;}
+.wf-card:nth-child(4){border-top-color:var(--orange);}
+.wf-icon-wrap{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:26px;}
+.wf-card:nth-child(1) .wf-icon-wrap{background:var(--gold-dim);}
+.wf-card:nth-child(2) .wf-icon-wrap{background:var(--teal-dim);}
+.wf-card:nth-child(3) .wf-icon-wrap{background:rgba(127,119,221,0.10);}
+.wf-card:nth-child(4) .wf-icon-wrap{background:var(--orange-dim);}
+.wf-step-num{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-300);margin-bottom:6px;}
+.wf-title-card{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:6px;line-height:1.4;}
+.wf-desc{font-size:11.5px;color:var(--gray-500);line-height:1.55;}
+.workflow-start-wrap{text-align:center;}
+.workflow-start-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 40px;background:linear-gradient(135deg,var(--navy),var(--navy-2));color:var(--gold-2);border:none;border-radius:var(--radius);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(15,34,53,.25);transition:var(--trans);}
+.workflow-start-btn:hover{box-shadow:0 6px 24px rgba(15,34,53,.35);transform:translateY(-1px);}
+.wf-top-bar{background:var(--navy);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;}
+.wf-top-bar-left{display:flex;align-items:center;gap:12px;}
+#formScreen{display:none;}
+.page-header{background:var(--navy);position:sticky;top:0;z-index:500;}
+.header-inner{max-width:860px;margin:0 auto;padding:24px 24px 20px;display:flex;align-items:center;gap:16px;}
+.header-text h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--white);margin-bottom:2px;}
+.header-text p{font-size:12px;color:var(--gray-300);font-weight:300;}
+.header-badge{margin-left:auto;flex-shrink:0;background:var(--gold-dim);border:1px solid rgba(200,164,90,.25);color:var(--gold-2);font-size:10px;font-weight:500;padding:3px 10px;border-radius:99px;letter-spacing:.06em;}
+.lang-switch-btn{flex-shrink:0;padding:5px 14px;border:1px solid rgba(200,164,90,.3);border-radius:99px;background:var(--gold-dim);color:var(--gold-2);font-size:11.5px;font-weight:500;cursor:pointer;font-family:inherit;transition:var(--trans);}
+.lang-switch-btn:hover{background:rgba(200,164,90,.22);}
+.progress-bar-wrap{background:var(--navy-2);border-top:1px solid rgba(255,255,255,.05);padding:8px 24px;display:flex;align-items:center;gap:14px;}
+.progress-track{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;}
+.progress-fill{height:100%;width:20%;background:linear-gradient(90deg,var(--teal-2),var(--gold));border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.progress-label{color:var(--gray-300);font-size:11px;white-space:nowrap;}
+.steps-nav{background:var(--navy-3);border-bottom:1px solid rgba(255,255,255,.05);display:flex;overflow-x:auto;padding:0 14px;gap:2px;scrollbar-width:none;}
+.steps-nav::-webkit-scrollbar{display:none;}
+.step-tab{display:flex;align-items:center;gap:6px;padding:9px 13px;font-size:11px;font-weight:500;color:rgba(255,255,255,.4);white-space:nowrap;cursor:default;border-bottom:2px solid transparent;margin-bottom:-1px;transition:var(--trans);flex-shrink:0;letter-spacing:.02em;}
+.step-tab.active{color:var(--gold-2);border-bottom-color:var(--gold);}
+.step-tab.done{color:var(--teal-2);}
+.step-dot{width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.1);font-size:9.5px;display:inline-flex;align-items:center;justify-content:center;font-weight:600;transition:var(--trans);}
+.step-tab.active .step-dot{background:var(--gold);color:var(--navy);}
+.step-tab.done .step-dot{background:var(--teal-2);color:#fff;}
+.form-wrap{max-width:860px;margin:0 auto;padding:22px 16px 100px;}
+.section-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:none;animation:fadeUp .28s ease both;}
+.section-card.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.card-header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--gold);}
+.card-header .sec-en{font-family:'Playfair Display',serif;font-size:15px;color:var(--white);}
+.card-header .sec-ar{font-family:'Cairo',sans-serif;font-size:14px;color:var(--gold-2);font-weight:500;}
+.card-header .sec-num{font-size:10px;color:var(--gray-300);letter-spacing:.1em;text-transform:uppercase;}
+.card-body{padding:24px;}
+.field{margin-bottom:18px;}
+.field:last-child{margin-bottom:0;}
+.field-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
+.lbl-en{font-size:12.5px;font-weight:600;color:var(--gray-700);}
+.lbl-ar{font-size:11.5px;color:var(--gray-500);}
+.req-en,.req-ar{color:var(--red);font-size:13px;}
+.field-hint{font-size:11px;color:var(--gray-300);margin-bottom:6px;line-height:1.5;}
+input[type=text],input[type=number],input[type=email],select,textarea{width:100%;padding:9px 12px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-size:13px;font-family:inherit;color:var(--gray-700);background:var(--gray-50);outline:none;transition:var(--trans);-webkit-appearance:none;}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%237C7870' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:32px;cursor:pointer;}
+input[type=text]:focus,input[type=number]:focus,input[type=email]:focus,select:focus,textarea:focus{border-color:var(--gold);background:var(--white);box-shadow:0 0 0 3px var(--gold-dim);}
+input.invalid,select.invalid,textarea.invalid{border-color:var(--red);box-shadow:0 0 0 3px var(--red-dim);}
+textarea{resize:vertical;min-height:80px;line-height:1.55;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:580px){.two-col{grid-template-columns:1fr;}}
+.sub-label{font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);margin:18px 0 12px;display:flex;align-items:center;gap:8px;}
+.sub-label::after{content:'';flex:1;height:1px;background:var(--gold-dim);}
+.s-divider{border:none;height:1px;background:var(--gray-100);margin:18px 0;}
+.err-msg{font-size:11px;color:var(--red);margin-top:5px;display:none;}
+.err-msg.show{display:block;}
+.cb-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+@media(max-width:460px){.cb-grid{grid-template-columns:1fr;}}
+.cb-item{display:flex;align-items:center;gap:9px;padding:8px 12px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);cursor:pointer;font-size:12.5px;color:var(--gray-700);background:var(--gray-50);transition:var(--trans);user-select:none;}
+.cb-item:hover{border-color:var(--gold);background:var(--gold-dim);}
+.cb-item.checked{border-color:var(--gold);background:var(--gold-dim);font-weight:500;}
+.cb-item input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--gold);flex-shrink:0;}
+.multi-select-wrap{position:relative;}
+.multi-select-btn{width:100%;padding:9px 32px 9px 12px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-size:13px;font-family:inherit;color:var(--gray-700);background:var(--gray-50);cursor:pointer;text-align:left;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%237C7870' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;transition:var(--trans);}
+.multi-select-btn.open,.multi-select-btn:focus{border-color:var(--gold);background-color:var(--white);box-shadow:0 0 0 3px var(--gold-dim);outline:none;}
+.multi-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:200;background:var(--white);border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);max-height:220px;overflow-y:auto;display:none;}
+.multi-dropdown.open{display:block;}
+.multi-opt{display:flex;align-items:center;gap:9px;padding:9px 13px;font-size:12.5px;cursor:pointer;transition:var(--trans);border-bottom:0.5px solid var(--gray-100);}
+.multi-opt:last-child{border-bottom:none;}
+.multi-opt:hover{background:var(--gray-50);}
+.multi-opt.selected{background:var(--gold-dim);}
+.multi-opt input[type=checkbox]{width:14px;height:14px;accent-color:var(--gold);flex-shrink:0;}
+.multi-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+.multi-tag{display:inline-flex;align-items:center;gap:5px;background:var(--navy);color:var(--gold-2);font-size:11px;padding:3px 9px;border-radius:99px;}
+.multi-tag-remove{cursor:pointer;opacity:.7;font-size:13px;}
+.multi-tag-remove:hover{opacity:1;}
+.resp-info{background:var(--teal-dim);border:1px solid rgba(26,138,122,.2);border-radius:var(--radius-sm);padding:11px 14px;font-size:12.5px;color:var(--teal);margin-bottom:16px;display:flex;align-items:flex-start;gap:9px;line-height:1.55;}
+.weight-tracker{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--radius-sm);background:var(--gray-100);margin-bottom:14px;font-size:12.5px;border:1.5px solid var(--gray-200);transition:var(--trans);}
+.weight-track{flex:1;height:5px;background:var(--gray-200);border-radius:99px;overflow:hidden;}
+.weight-fill{height:100%;background:var(--teal);border-radius:99px;transition:width .3s ease;}
+.weight-fill.over{background:var(--red);}
+.weight-val{font-weight:600;font-size:14px;min-width:42px;text-align:right;}
+.weight-val.ok{color:var(--teal);}
+.weight-val.over{color:var(--red);}
+.weight-tracker.warn{background:var(--red-dim);border-color:var(--red);}
+.weight-tracker.done-bg{background:var(--teal-dim);border-color:rgba(26,138,122,.3);}
+.warn-msg{background:var(--orange-dim);border:1px solid rgba(217,119,6,.2);border-radius:var(--radius-xs);padding:8px 12px;font-size:12px;color:var(--orange);margin-top:8px;display:none;}
+.warn-msg.show{display:flex;align-items:center;gap:7px;}
+.resp-block{border:1.5px solid var(--gray-200);border-radius:var(--radius);padding:16px;margin-bottom:10px;background:var(--gray-50);transition:var(--trans);}
+.resp-block:hover{border-color:var(--gray-300);}
+.resp-block.active-block{border-color:var(--gold);background:var(--white);}
+.resp-block-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.resp-badge-wrap{display:flex;align-items:center;gap:9px;}
+.resp-num{width:24px;height:24px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.resp-lbl{font-size:12.5px;font-weight:600;color:var(--gray-700);}
+.resp-optional{font-size:10.5px;color:var(--gray-300);font-style:italic;}
+.resp-grid{display:grid;grid-template-columns:1fr 100px;gap:10px;margin-bottom:8px;}
+@media(max-width:460px){.resp-grid{grid-template-columns:1fr;}}
+.remove-resp-btn{background:none;border:none;cursor:pointer;color:var(--gray-300);font-size:16px;padding:2px 6px;border-radius:var(--radius-xs);transition:var(--trans);}
+.remove-resp-btn:hover{color:var(--red);background:var(--red-dim);}
+.guidance-panel{margin-top:10px;border-radius:var(--radius-sm);border:1px solid rgba(26,138,122,.2);background:linear-gradient(135deg,rgba(26,138,122,.04),rgba(200,164,90,.03));overflow:hidden;}
+.guidance-trigger{width:100%;padding:8px 13px;display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-size:11.5px;font-weight:500;color:var(--teal);font-family:inherit;text-align:left;transition:var(--trans);}
+.guidance-trigger:hover{background:var(--teal-dim);}
+.guidance-trigger-icon{width:18px;height:18px;border-radius:50%;background:var(--teal-dim);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.guidance-body{padding:12px;border-top:1px solid rgba(26,138,122,.12);display:none;}
+.guidance-body.open{display:block;}
+.guidance-section-title{font-size:10.5px;font-weight:600;color:var(--gray-500);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
+.guidance-item{display:flex;align-items:flex-start;gap:8px;padding:7px 9px;margin-bottom:5px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--white);font-size:12px;color:var(--gray-700);line-height:1.5;cursor:pointer;transition:var(--trans);}
+.guidance-item:last-child{margin-bottom:0;}
+.guidance-item:hover{border-color:var(--gold);background:var(--gold-dim);}
+.guidance-item.used{opacity:.4;cursor:not-allowed;text-decoration:line-through;}
+.guidance-item.used:hover{border-color:var(--gray-200);background:var(--white);}
+.guidance-plus{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:var(--teal-dim);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px;}
+.guidance-item:hover .guidance-plus{background:var(--teal);color:#fff;}
+.guidance-item.used .guidance-plus{background:var(--gray-100);color:var(--gray-300);}
+.add-resp-btn{width:100%;padding:10px;border:1.5px dashed var(--gray-300);border-radius:var(--radius-sm);background:none;cursor:pointer;font-size:12.5px;color:var(--gray-500);font-family:inherit;font-weight:500;display:flex;align-items:center;justify-content:center;gap:7px;transition:var(--trans);}
+.add-resp-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+.skills-intro{background:var(--navy);border-radius:var(--radius-sm);padding:12px 15px;margin-bottom:14px;font-size:12px;color:var(--gray-300);line-height:1.6;}
+.skills-intro strong{color:var(--gold-2);}
+.skills-group{margin-bottom:20px;}
+.skills-group-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.skills-group-title{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-500);}
+.skills-counter{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--gray-300);}
+.skills-counter span.cnt{font-weight:700;color:var(--gray-700);}
+.skills-counter.ok span.cnt{color:var(--teal);}
+.skills-counter.fail span.cnt{color:var(--red);}
+.skill-tags{display:flex;flex-wrap:wrap;gap:7px;}
+.skill-tag{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:99px;border:1.5px solid var(--gray-200);font-size:12px;cursor:pointer;transition:var(--trans);background:var(--white);color:var(--gray-700);user-select:none;}
+.skill-tag:hover{border-color:var(--gold);background:var(--gold-dim);}
+.skill-tag.selected{background:var(--navy);color:var(--gold-2);border-color:var(--navy);font-weight:500;}
+.skill-tag .skill-check{font-size:10px;display:none;}
+.skill-tag.selected .skill-check{display:inline;}
+.skills-err{font-size:11.5px;color:var(--red);margin-top:6px;display:none;}
+.skills-err.show{display:block;}
+.skills-group.invalid .skill-tags{border:1.5px solid var(--red);border-radius:var(--radius-sm);padding:8px;}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:18px;border-top:1px solid var(--gray-100);gap:10px;}
+.btn{padding:10px 22px;border-radius:var(--radius-sm);font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:var(--trans);border:none;display:inline-flex;align-items:center;gap:6px;}
+.btn-back{background:var(--white);color:var(--gray-500);border:1.5px solid var(--gray-200);}
+.btn-back:hover{border-color:var(--gray-300);color:var(--gray-700);}
+.btn-next{background:var(--navy);color:var(--gold-2);box-shadow:0 2px 10px rgba(15,34,53,.2);}
+.btn-next:hover{background:var(--navy-2);}
+.btn-submit{background:linear-gradient(135deg,var(--teal),#147066);color:var(--white);box-shadow:0 2px 10px rgba(26,138,122,.28);}
+.btn-submit:hover{box-shadow:0 4px 16px rgba(26,138,122,.38);}
+.btn:disabled{opacity:.6;cursor:not-allowed;}
+.success-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:48px 32px 36px;text-align:center;display:none;animation:fadeUp .4s ease;}
+.success-card.active{display:block;}
+.succ-badge-wrap{display:flex;justify-content:center;margin-bottom:22px;}
+.succ-check-ring{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-2));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(26,138,122,.3);animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both;}
+@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.succ-check-inner{font-size:36px;color:var(--white);}
+.succ-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:5px;}
+.succ-ar{font-size:14px;color:var(--gray-500);margin-bottom:24px;}
+.succ-status-card{display:flex;align-items:flex-start;gap:14px;background:var(--teal-dim);border:1px solid rgba(26,138,122,.25);border-radius:var(--radius);padding:16px 20px;text-align:left;margin-bottom:20px;}
+.succ-status-icon{font-size:26px;flex-shrink:0;margin-top:2px;}
+.succ-status-label{font-size:12px;font-weight:600;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;}
+.succ-status-text{font-size:13.5px;color:var(--gray-700);line-height:1.6;}
+.succ-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px;}
+@media(max-width:500px){.succ-summary{grid-template-columns:1fr;}}
+.succ-summary-item{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:12px 14px;text-align:left;}
+.succ-summary-lbl{font-size:10.5px;color:var(--gray-300);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;}
+.succ-summary-val{font-size:13px;color:var(--navy);font-weight:500;}
+.succ-workflow{background:var(--navy);border-radius:var(--radius);padding:18px 20px;margin-bottom:24px;text-align:left;}
+.succ-wf-title{font-size:11.5px;font-weight:600;color:var(--gold-2);letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px;}
+.succ-wf-steps{display:flex;gap:0;}
+@media(max-width:520px){.succ-wf-steps{flex-direction:column;gap:8px;}}
+.succ-wf-step{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;padding:0 8px;}
+.succ-wf-step:not(:last-child)::after{content:'\2192';position:absolute;right:-8px;top:12px;color:rgba(255,255,255,.3);font-size:14px;}
+@media(max-width:520px){.succ-wf-step::after{display:none;}}
+.succ-wf-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;margin-bottom:6px;font-weight:700;}
+.succ-wf-dot.done{background:var(--teal);color:var(--white);}
+.succ-wf-dot.active{background:var(--gold);color:var(--navy);animation:pulse 1.4s infinite;}
+.succ-wf-dot.pending{background:rgba(255,255,255,.12);color:rgba(255,255,255,.4);}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.succ-wf-label{font-size:10.5px;color:rgba(255,255,255,.55);text-align:center;line-height:1.35;}
+.succ-wf-label.active{color:var(--gold-2);font-weight:500;}
+.succ-actions{display:flex;justify-content:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+.succ-ref{font-size:11px;color:var(--gray-300);}
+.hidden{display:none!important;}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: LANGUAGE -->
+<div id="langScreen">
+  <div class="lang-card">
+    <div class="lang-title-en">Job Analysis Form</div>
+    <div class="lang-title-ar">استمارة تحليل وظيفي</div>
+    <div class="lang-intro" id="langIntroEn">The Job Analysis Form is a strategic HR tool designed to capture a comprehensive understanding of each role within Mobica.</div>
+    <div class="lang-intro" id="langIntroAr" style="display:none;font-family:'Cairo',sans-serif;">استمارة تحليل الوظيفة هي أداة استراتيجية للموارد البشرية مصممة لفهم شامل لكل دور وظيفي داخل موبيكا.</div>
+    <div class="lang-subtitle">Please select your preferred language.<br>الرجاء اختيار لغتك المفضلة.</div>
+    <div class="lang-btns">
+      <button class="lang-btn" id="btnEn"><span class="lang-flag">🇬🇧</span><span class="lang-name-main">English</span><span class="lang-name-sub">Continue in English</span></button>
+      <button class="lang-btn" id="btnAr"><span class="lang-flag">🇸🇦</span><span class="lang-name-main">عربي</span><span class="lang-name-sub">المتابعة بالعربية</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2: WORKFLOW -->
+<div id="workflowScreen">
+  <div class="wf-top-bar">
+    <div class="wf-top-bar-left"><span id="wfHeaderTitle" style="color:var(--white);font-size:15px;font-weight:600;"></span></div>
+    <button class="lang-switch-btn" id="wfBackBtn"></button>
+  </div>
+  <div class="workflow-wrap">
+    <div class="workflow-header"><h2 id="wfTitle"></h2><p id="wfSubtitle"></p></div>
+    <div class="workflow-steps">
+      <div class="wf-card"><div class="wf-icon-wrap">📝</div><div class="wf-step-num" id="wfStepA"></div><div class="wf-title-card" id="wfTitleA"></div><div class="wf-desc" id="wfDescA"></div></div>
+      <div class="wf-card"><div class="wf-icon-wrap">✅</div><div class="wf-step-num" id="wfStepB"></div><div class="wf-title-card" id="wfTitleB"></div><div class="wf-desc" id="wfDescB"></div></div>
+      <div class="wf-card"><div class="wf-icon-wrap">🎯</div><div class="wf-step-num" id="wfStepC"></div><div class="wf-title-card" id="wfTitleC"></div><div class="wf-desc" id="wfDescC"></div></div>
+      <div class="wf-card"><div class="wf-icon-wrap">🏆</div><div class="wf-step-num" id="wfStepD"></div><div class="wf-title-card" id="wfTitleD"></div><div class="wf-desc" id="wfDescD"></div></div>
+    </div>
+    <div class="workflow-start-wrap"><button class="workflow-start-btn" id="wfStartBtn"></button></div>
+  </div>
+</div>
+
+<!-- SCREEN 3: FORM -->
+<div id="formScreen">
+  <div class="page-header">
+    <div class="header-inner">
+      <div class="header-text"><h1 id="formHeaderTitle"></h1><p id="formHeaderSub"></p></div>
+      <button class="lang-switch-btn" id="formBackBtn"></button>
+      <div class="header-badge" id="formBadge"></div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+  <div class="steps-nav" id="stepsNav">
+    <div class="step-tab active" data-step="0"><span class="step-dot">1</span><span id="tab1"></span></div>
+    <div class="step-tab" data-step="1"><span class="step-dot">2</span><span id="tab2"></span></div>
+    <div class="step-tab" data-step="2"><span class="step-dot">3</span><span id="tab3"></span></div>
+    <div class="step-tab" data-step="3"><span class="step-dot">4</span><span id="tab4"></span></div>
+    <div class="step-tab" data-step="4"><span class="step-dot">5</span><span id="tab5"></span></div>
+  </div>
+  <div class="form-wrap">
+
+    <!-- SEC 1 -->
+    <div class="section-card active" id="sec-0">
+      <div class="card-header"><div><div class="sec-en" id="s1en"></div><div class="sec-ar" id="s1ar"></div></div><div class="sec-num">01 / 05</div></div>
+      <div class="card-body">
+        <!-- Manager Email -->
+        <div class="field" style="max-width:60%">
+          <div class="field-label"><span class="lbl-en" id="lbl_email"></span><span class="lbl-ar" id="lbl_email_ar"></span></div>
+          <input type="email" id="managerEmail" required/>
+          <div class="err-msg" id="err-managerEmail"></div>
+        </div>
+        <div class="two-col">
+          <div class="field"><div class="field-label"><span class="lbl-en" id="lbl_jobTitleEn"></span><span class="lbl-ar" id="lbl_jobTitleEnAr"></span></div><input type="text" id="jobTitleEn" required/><div class="err-msg" id="err-jobTitleEn"></div></div>
+          <div class="field"><div class="field-label"><span class="lbl-en" id="lbl_jobTitleAr"></span><span class="lbl-ar" id="lbl_jobTitleArAr"></span></div><input type="text" id="jobTitleAr" required/><div class="err-msg" id="err-jobTitleAr"></div></div>
+        </div>
+        <div class="two-col">
+          <div class="field"><div class="field-label"><span class="lbl-en" id="lbl_sector"></span></div><select id="sector"></select><div class="err-msg" id="err-sector"></div></div>
+          <div class="field hidden" id="deptField"><div class="field-label"><span class="lbl-en" id="lbl_dept"></span></div><select id="department"></select><div class="err-msg" id="err-department"></div></div>
+        </div>
+        <div class="field"><div class="field-label"><span class="lbl-en" id="lbl_reportsTo"></span></div><input type="text" id="reportsTo" required/><div class="err-msg" id="err-reportsTo"></div></div>
+        <hr class="s-divider"/>
+        <div class="two-col">
+          <div class="field"><div class="field-label"><span class="lbl-en" id="lbl_edu"></span></div><select id="education"></select><div class="err-msg" id="err-education"></div></div>
+          <div class="field"><div class="field-label"><span class="lbl-en" id="lbl_exp"></span></div><select id="experience"></select><div class="err-msg" id="err-experience"></div></div>
+        </div>
+        <div class="field" style="max-width:50%"><div class="field-label"><span class="lbl-en" id="lbl_loc"></span></div><select id="workLocation"></select><div class="err-msg" id="err-workLocation"></div></div>
+        <div class="nav-row"><div></div><button class="btn btn-next" id="s1next"></button></div>
+      </div>
+    </div>
+
+    <!-- SEC 2 -->
+    <div class="section-card" id="sec-1">
+      <div class="card-header"><div><div class="sec-en" id="s2en"></div><div class="sec-ar" id="s2ar"></div></div><div class="sec-num">02 / 05</div></div>
+      <div class="card-body">
+        <div class="field"><div class="field-label"><span class="lbl-en" id="lbl_purpose"></span></div><div class="field-hint" id="purposeHint"></div><textarea id="jobPurpose" rows="5" required></textarea><div class="err-msg" id="err-jobPurpose"></div></div>
+        <div class="nav-row"><button class="btn btn-back" id="s2back"></button><button class="btn btn-next" id="s2next"></button></div>
+      </div>
+    </div>
+
+    <!-- SEC 3 -->
+    <div class="section-card" id="sec-2">
+      <div class="card-header"><div><div class="sec-en" id="s3en"></div><div class="sec-ar" id="s3ar"></div></div><div class="sec-num">03 / 05</div></div>
+      <div class="card-body">
+        <div class="sub-label" id="s3sub1"></div>
+        <div class="field"><div class="field-label"><span class="lbl-en" id="lbl_worksWith"></span></div><div class="field-hint" id="worksWithHint"></div><div class="multi-select-wrap" id="worksWithWrap"><button type="button" class="multi-select-btn" id="worksWithBtn"></button><div class="multi-dropdown" id="worksWithDropdown"></div></div><div class="multi-tags" id="worksWithTags"></div></div>
+        <hr class="s-divider"/>
+        <div class="sub-label" id="s3sub2"></div>
+        <div class="field"><div class="field-label"><span class="lbl-en" id="lbl_external"></span></div><div class="cb-grid" id="externalCbs"></div></div>
+        <div class="nav-row"><button class="btn btn-back" id="s3back"></button><button class="btn btn-next" id="s3next"></button></div>
+      </div>
+    </div>
+
+    <!-- SEC 4 -->
+    <div class="section-card" id="sec-3">
+      <div class="card-header"><div><div class="sec-en" id="s4en"></div><div class="sec-ar" id="s4ar"></div></div><div class="sec-num">04 / 05</div></div>
+      <div class="card-body">
+        <div class="resp-info" id="respInfo"></div>
+        <div class="weight-tracker" id="weightTracker"><span id="weightLabelText" style="font-size:12px;color:var(--gray-500)"></span><div class="weight-track"><div class="weight-fill" id="weightFill" style="width:0%"></div></div><span class="weight-val" id="weightVal">0%</span><span id="weightOf100" style="font-size:11px;color:var(--gray-300)"></span></div>
+        <div class="warn-msg" id="weightWarn"></div>
+        <div id="respContainer"></div>
+        <button type="button" class="add-resp-btn" id="addRespBtn"></button>
+        <div class="nav-row"><button class="btn btn-back" id="s4back"></button><button class="btn btn-next" id="s4next"></button></div>
+      </div>
+    </div>
+
+    <!-- SEC 5 -->
+    <div class="section-card" id="sec-4">
+      <div class="card-header"><div><div class="sec-en" id="s5en"></div><div class="sec-ar" id="s5ar"></div></div><div class="sec-num">05 / 05</div></div>
+      <div class="card-body">
+        <div class="field" style="max-width:50%"><div class="field-label"><span class="lbl-en" id="lbl_eng"></span></div><select id="englishLevel"></select><div class="err-msg" id="err-englishLevel"></div></div>
+        <hr class="s-divider"/>
+        <div class="skills-intro" id="skillsIntro"></div>
+        <div class="skills-group" id="softGroup"><div class="skills-group-hdr"><div class="skills-group-title" id="softGroupTitle"></div><div class="skills-counter" id="softCounter"><span class="cnt" id="softCnt">0</span><span id="softCounterLabel"></span></div></div><div class="skill-tags" id="softSkillTags"></div><div class="skills-err" id="softErr"></div></div>
+        <div class="skills-group" id="compGroup"><div class="skills-group-hdr"><div class="skills-group-title" id="compGroupTitle"></div><div class="skills-counter" id="compCounter"><span class="cnt" id="compCnt">0</span><span id="compCounterLabel"></span></div></div><div class="skill-tags" id="compSkillTags"></div><div class="skills-err" id="compErr"></div></div>
+        <div class="skills-group" id="techGroup"><div class="skills-group-hdr"><div class="skills-group-title" id="techGroupTitle"></div><div class="skills-counter" id="techCounter"><span class="cnt" id="techCnt">0</span><span id="techCounterLabel"></span></div></div><div class="skill-tags" id="techSkillTags"></div><div class="skills-err" id="techErr"></div></div>
+        <div class="nav-row"><button class="btn btn-back" id="s5back"></button><button class="btn btn-submit" id="s5submit"></button></div>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-card" id="successCard">
+      <div class="succ-badge-wrap"><div class="succ-check-ring"><div class="succ-check-inner">&#10003;</div></div></div>
+      <h2 class="succ-title" id="succTitle"></h2>
+      <p class="succ-ar" id="succSub"></p>
+      <div class="succ-status-card"><div class="succ-status-icon">&#128269;</div><div><div class="succ-status-label" id="succStatusLabel"></div><div class="succ-status-text" id="succStatusText"></div></div></div>
+      <div class="succ-summary" id="succSummary"></div>
+      <div class="succ-workflow"><div class="succ-wf-title" id="succWfTitle"></div><div class="succ-wf-steps" id="succWfSteps"></div></div>
+      <div class="succ-actions"><button class="btn btn-next" id="succRestart"></button><button class="btn btn-back" id="succPrint"></button></div>
+      <p class="succ-ref" id="succRef"></p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─── BACKEND ENDPOINT ─── */
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwa-FQi8jeVREhey1w8FoG0-kn4aKysRMPNF-pz5hew6951XX-AFEYlUhpwNvhQTXk0/exec';
+
+  /* ─── TRANSLATIONS ─── */
+  var T = {
+    en: {
+      wfHeaderTitle:'Job Analysis Form',
+      wfTitle:'How Your Request Gets Processed',
+      wfSubtitle:'Complete the form — here is what happens after you submit.',
+      wfStepA:'Step A',wfStepB:'Step B',wfStepC:'Step C',wfStepD:'Step D',
+      wfTitleA:'Hiring Manager Submits Form',wfTitleB:'OD Review & Approval',
+      wfTitleC:'Talent Acquisition Process',wfTitleD:'Hiring Manager Selects Candidate',
+      wfDescA:'Fill in and submit the job analysis form with all role details.',
+      wfDescB:'OD team reviews, validates job data, and grants approval.',
+      wfDescC:'Talent Acquisition launches recruitment based on approved job analysis.',
+      wfDescD:'Review shortlisted candidates, interview, and make final selection.',
+      wfStart:'Start the Form \u2192',langSwitch:'\u2190 Change Language',
+      formTitle:'Job Analysis Form',formSub:'Human Resources & Organizational Development',
+      formBadge:'CONFIDENTIAL',sectionOf:'Section',of:'of',completed:'Completed \u2713',
+      tab1:'Job Info',tab2:'Purpose',tab3:'Relations',tab4:'Responsibilities',tab5:'Skills & Req.',
+      s1en:'1. Job Identification',s1ar:'\u0627\u0644\u062a\u0639\u0631\u064a\u0641 \u0627\u0644\u0648\u0638\u064a\u0641\u064a',
+      s2en:'2. Job Purpose',s2ar:'\u0645\u0644\u062e\u0635 \u0627\u0644\u0648\u0638\u064a\u0641\u0629',
+      s3en:'3. Job Relationships',s3ar:'\u0627\u0644\u0639\u0644\u0627\u0642\u0627\u062a \u0627\u0644\u0648\u0638\u064a\u0641\u064a\u0629',
+      s4en:'4. Responsibilities',s4ar:'\u0627\u0644\u0645\u0633\u0624\u0648\u0644\u064a\u0627\u062a',
+      s5en:'5. Skills & Requirements',s5ar:'\u0627\u0644\u0645\u0647\u0627\u0631\u0627\u062a \u0648\u0627\u0644\u0645\u062a\u0637\u0644\u0628\u0627\u062a',
+      lbl_email:'Manager Email *',lbl_email_ar:'البريد الإلكتروني للمدير',
+      emailPh:'manager@mobica.com',emailInvalid:'Please enter a valid email address.',
+      lbl_jobTitleEn:'Job Title \u2014 English *',lbl_jobTitleEnAr:'المسمى (إنجليزي)',
+      lbl_jobTitleAr:'Job Title \u2014 Arabic *',lbl_jobTitleArAr:'المسمى (عربي)',
+      lbl_sector:'Sector *',lbl_dept:'Department *',lbl_reportsTo:'Reports To (Manager Name) *',
+      lbl_edu:'Minimum Education *',lbl_exp:'Minimum Experience *',lbl_loc:'Work Location *',
+      lbl_purpose:'General Nature & Main Functions *',
+      lbl_worksWith:'Works With (Internal Sectors)',lbl_external:'External Contacts',lbl_eng:'English Proficiency *',
+      purposeHint:'Write 3\u20135 sentences describing why this role exists and what it achieves.',
+      worksWithPlaceholder:'Select sectors\u2026',s3sub1:'Internal Collaboration',s3sub2:'External Contacts',
+      worksWithHint:'Select all sectors this role regularly collaborates with.',
+      respInfo:'\u24d8 Add responsibilities in order of importance. Each weight \u22643 25%. Total must equal exactly 100%. Items 1\u20135 are mandatory.',
+      weightLabel:'Total weight:',weightOf100:'/ 100%',
+      weightWarn:'\u26a0 Total weight exceeds 100%. Please reduce one or more values.',
+      addResp:'+ Add Responsibility',guidanceTrigger:'\u2736 Smart Suggestions',
+      guidanceTitle:'Suggested responsibilities \u2014 click + to use',
+      skillsIntro:'<strong>Smart Skills</strong> \u2014 Select minimum 3 from each category.',
+      softTitle:'Soft Skills',compTitle:'Computer & Digital Skills',techTitle:'Technical Skills',
+      minSelected:' selected / min. 3',
+      skillsErrSoft:'\u26a0 Please select at least 3 soft skills.',
+      skillsErrComp:'\u26a0 Please select at least 3 computer skills.',
+      skillsErrTech:'\u26a0 Please select at least 3 technical skills.',
+      required:'This field is required.',selectRequired:'Please select an option.',
+      deptRequired:'Please select a department.',respRequired:'Please complete this responsibility.',
+      btnNext:'Next \u2192',btnBack:'\u2190 Back',btnSubmit:'\u2713 Submit Form',
+      succTitle:'Form Submitted Successfully!',
+      succSub:'Thank you. The OD team will review within 3\u20135 working days.',
+      succStatus:'UNDER REVIEW',
+      succStatusText:'Your job analysis has been submitted and is now under review by the OD Team.',
+      succWfTitle:'NEXT STEPS IN YOUR REQUEST',
+      succWfA:'Submitted',succWfB:'OD Review',succWfC:'TA Process',succWfD:'Selection',
+      succPrint:'\ud83d\udda8 Print / PDF',succRestart:'Submit Another Form',
+      succRef:'Please keep this confirmation for your records.',
+      succLblJob:'JOB TITLE',succLblSector:'SECTOR',succLblDept:'DEPARTMENT',
+      respLabel:'Responsibility',respOptional:'Optional',respRequired2:'Required',
+      respDescPh:'Describe the responsibility clearly\u2026',
+      respActionPh:'Key actions / deliverables\u2026',respWeightPh:'% weight',
+      selSector:'\u2014 Select Sector \u2014',selDept:'\u2014 Select Department \u2014',
+      selEdu:'\u2014 Select \u2014',selExp:'\u2014 Select \u2014',selLoc:'\u2014 Select \u2014',selEng:'\u2014 Select \u2014',
+      eduLiteracy:'Literacy',eduPrep:'Preparatory',eduVoc:'Secondary \u2013 Vocational',
+      eduSec:'Secondary \u2013 General',eduDip:'Diploma',eduBach:"Bachelor's degree",eduMaster:"Master's degree",eduPhd:'PhD',
+      expNone:'No experience required',expLt1:'Less than 1 year',
+      exp12:'1\u20132 years',exp35:'3\u20135 years',exp610:'6\u201310 years',exp10p:'10+ years',
+      locHead:'Head Office',locAlex:'Alexandria Branch',locHelio:'Heliopolis Branch',
+      locMobica:'Mobica Factory',locIvend:'Ivend Factory',locBlue:'Blue Ground',locAuto:'Automotive Factory',
+      engNone:'Not required',engBeg:'Beginner',engGood:'Good',engVg:'Very Good',engExc:'Excellent',engFluent:'Fluent',
+      sectors:['Manufacturing','Human Resources','Finance','Commercial','HSE','IT','Quality','Supply Chain','Technical Office','Product Design','Business Development'],
+      externals:['Clients','Subcontractors','Public / Government Entities','Suppliers','Universities']
+    },
+    ar: {
+      wfHeaderTitle:'\u0627\u0633\u062a\u0645\u0627\u0631\u0629 \u062a\u062d\u0644\u064a\u0644 \u0648\u0638\u064a\u0641\u064a',
+      wfTitle:'\u0643\u064a\u0641 \u062a\u062a\u0645 \u0645\u0639\u0627\u0644\u062c\u0629 \u0637\u0644\u0628\u0643',
+      wfSubtitle:'\u0623\u0643\u0645\u0644 \u0627\u0644\u0646\u0645\u0648\u0630\u062c \u2014 \u0625\u0644\u064a\u0643 \u0645\u0627 \u064a\u062d\u062f\u062b \u0628\u0639\u062f \u0627\u0644\u0625\u0631\u0633\u0627\u0644.',
+      wfStepA:'\u0627\u0644\u062e\u0637\u0648\u0629 \u0623',wfStepB:'\u0627\u0644\u062e\u0637\u0648\u0629 \u0628',wfStepC:'\u0627\u0644\u062e\u0637\u0648\u0629 \u062c',wfStepD:'\u0627\u0644\u062e\u0637\u0648\u0629 \u062f',
+      wfTitleA:'\u0627\u0644\u0645\u062f\u064a\u0631 \u0627\u0644\u0645\u062e\u062a\u0635 \u064a\u0631\u0633\u0644 \u0627\u0644\u0627\u0633\u062a\u0645\u0627\u0631\u0629',
+      wfTitleB:'\u0645\u0631\u0627\u062c\u0639\u0629 \u0648\u0645\u0648\u0627\u0641\u0642\u0629 \u0627\u0644\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u062a\u0646\u0638\u064a\u0645\u064a',
+      wfTitleC:'\u0639\u0645\u0644\u064a\u0629 \u0627\u0644\u062a\u0648\u0638\u064a\u0641 \u0628\u0627\u0633\u062a\u0642\u0637\u0627\u0628 \u0627\u0644\u0645\u0648\u0627\u0647\u0628',
+      wfTitleD:'\u0627\u062e\u062a\u064a\u0627\u0631 \u0627\u0644\u0645\u062f\u064a\u0631 \u0644\u0644\u0645\u0631\u0634\u062d \u0627\u0644\u0646\u0647\u0627\u0626\u064a',
+      wfDescA:'\u062a\u0642\u0648\u0645 \u0628\u062a\u0639\u0628\u0626\u0629 \u0648\u0625\u0631\u0633\u0627\u0644 \u0627\u0633\u062a\u0645\u0627\u0631\u0629 \u062a\u062d\u0644\u064a\u0644 \u0627\u0644\u0648\u0638\u064a\u0641\u0629.',
+      wfDescB:'\u064a\u0631\u0627\u062c\u0639 \u0641\u0631\u064a\u0642 \u0627\u0644\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u062a\u0646\u0638\u064a\u0645\u064a \u0627\u0644\u0627\u0633\u062a\u0645\u0627\u0631\u0629 \u0648\u064a\u0645\u0646\u062d \u0627\u0644\u0645\u0648\u0627\u0641\u0642\u0629.',
+      wfDescC:'\u064a\u0628\u062f\u0623 \u0641\u0631\u064a\u0642 \u0627\u0633\u062a\u0642\u0637\u0627\u0628 \u0627\u0644\u0645\u0648\u0627\u0647\u0628 \u0639\u0645\u0644\u064a\u0629 \u0627\u0644\u062a\u0648\u0638\u064a\u0641.',
+      wfDescD:'\u062a\u0642\u0648\u0645 \u0628\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u0645\u0631\u0634\u062d\u064a\u0646 \u0648\u0625\u062c\u0631\u0627\u0621 \u0627\u0644\u0645\u0642\u0627\u0628\u0644\u0627\u062a.',
+      wfStart:'\u0628\u062f\u0621 \u0627\u0644\u0627\u0633\u062a\u0645\u0627\u0631\u0629 \u2192',langSwitch:'\u062a\u063a\u064a\u064a\u0631 \u0627\u0644\u0644\u063a\u0629 \u2190',
+      formTitle:'\u0627\u0633\u062a\u0645\u0627\u0631\u0629 \u062a\u062d\u0644\u064a\u0644 \u0648\u0638\u064a\u0641\u064a',
+      formSub:'\u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629 \u0648\u0627\u0644\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u062a\u0646\u0638\u064a\u0645\u064a',
+      formBadge:'\u0633\u0631\u064a',sectionOf:'\u0642\u0633\u0645',of:'\u0645\u0646',completed:'\u0645\u0643\u062a\u0645\u0644 \u2713',
+      tab1:'\u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u0648\u0638\u064a\u0641\u0629',tab2:'\u0645\u0644\u062e\u0635 \u0627\u0644\u0648\u0638\u064a\u0641\u0629',tab3:'\u0627\u0644\u0639\u0644\u0627\u0642\u0627\u062a',tab4:'\u0627\u0644\u0645\u0633\u0624\u0648\u0644\u064a\u0627\u062a',tab5:'\u0627\u0644\u0645\u0647\u0627\u0631\u0627\u062a',
+      s1en:'1. \u0627\u0644\u062a\u0639\u0631\u064a\u0641 \u0627\u0644\u0648\u0638\u064a\u0641\u064a',s1ar:'Job Identification',
+      s2en:'2. \u0645\u0644\u062e\u0635 \u0627\u0644\u0648\u0638\u064a\u0641\u0629',s2ar:'Job Purpose',
+      s3en:'3. \u0627\u0644\u0639\u0644\u0627\u0642\u0627\u062a \u0627\u0644\u0648\u0638\u064a\u0641\u064a\u0629',s3ar:'Job Relationships',
+      s4en:'4. \u0627\u0644\u0645\u0633\u0624\u0648\u0644\u064a\u0627\u062a',s4ar:'Responsibilities',
+      s5en:'5. \u0627\u0644\u0645\u0647\u0627\u0631\u0627\u062a \u0648\u0627\u0644\u0645\u062a\u0637\u0644\u0628\u0627\u062a',s5ar:'Skills & Requirements',
+      lbl_email:'\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a \u0644\u0644\u0645\u062f\u064a\u0631 *',lbl_email_ar:'Manager Email',
+      emailPh:'manager@mobica.com',emailInvalid:'\u064a\u0631\u062c\u0649 \u0625\u062f\u062e\u0627\u0644 \u0628\u0631\u064a\u062f \u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a \u0635\u062d\u064a\u062d.',
+      lbl_jobTitleEn:'\u0627\u0644\u0645\u0633\u0645\u0649 \u0627\u0644\u0648\u0638\u064a\u0641\u064a \u2014 \u0625\u0646\u062c\u0644\u064a\u0632\u064a *',lbl_jobTitleEnAr:'Job Title (English)',
+      lbl_jobTitleAr:'\u0627\u0644\u0645\u0633\u0645\u0649 \u0627\u0644\u0648\u0638\u064a\u0641\u064a \u2014 \u0639\u0631\u0628\u064a *',lbl_jobTitleArAr:'Job Title (Arabic)',
+      lbl_sector:'\u0627\u0644\u0642\u0637\u0627\u0639 *',lbl_dept:'\u0627\u0644\u0642\u0633\u0645 *',lbl_reportsTo:'\u0627\u0644\u0631\u0626\u064a\u0633 \u0627\u0644\u0645\u0628\u0627\u0634\u0631 *',
+      lbl_edu:'\u0623\u062f\u0646\u0649 \u0645\u0624\u0647\u0644 \u062f\u0631\u0627\u0633\u064a *',lbl_exp:'\u0623\u062f\u0646\u0649 \u0633\u0646\u0648\u0627\u062a \u0627\u0644\u062e\u0628\u0631\u0629 *',lbl_loc:'\u0645\u0648\u0642\u0639 \u0627\u0644\u0639\u0645\u0644 *',
+      lbl_purpose:'\u0627\u0644\u0637\u0628\u064a\u0639\u0629 \u0627\u0644\u0639\u0627\u0645\u0629 \u0648\u0627\u0644\u0645\u0647\u0627\u0645 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629 *',
+      lbl_worksWith:'\u064a\u062a\u0639\u0627\u0645\u0644 \u0645\u0639 \u0627\u0644\u0642\u0637\u0627\u0639\u0627\u062a \u0627\u0644\u062f\u0627\u062e\u0644\u064a\u0629',
+      lbl_external:'\u062c\u0647\u0627\u062a \u062e\u0627\u0631\u062c \u0627\u0644\u0645\u0624\u0633\u0633\u0629',lbl_eng:'\u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629 *',
+      purposeHint:'\u0627\u0643\u062a\u0628 3-5 \u062c\u0645\u0644 \u062a\u0635\u0641 \u0633\u0628\u0628 \u0648\u062c\u0648\u062f \u0647\u0630\u0647 \u0627\u0644\u0648\u0638\u064a\u0641\u0629.',
+      worksWithPlaceholder:'\u0627\u062e\u062a\u0631 \u0627\u0644\u0642\u0637\u0627\u0639\u0627\u062a\u2026',
+      s3sub1:'\u0627\u0644\u062a\u0639\u0627\u0648\u0646 \u0627\u0644\u062f\u0627\u062e\u0644\u064a',s3sub2:'\u062c\u0647\u0627\u062a \u0627\u0644\u0627\u062a\u0635\u0627\u0644 \u0627\u0644\u062e\u0627\u0631\u062c\u064a\u0629',
+      worksWithHint:'\u0627\u062e\u062a\u0631 \u062c\u0645\u064a\u0639 \u0627\u0644\u0642\u0637\u0627\u0639\u0627\u062a \u0627\u0644\u062a\u064a \u062a\u062a\u0639\u0627\u0648\u0646 \u0645\u0639\u0647\u0627.',
+      respInfo:'\u24d8 \u0623\u0636\u0641 \u0627\u0644\u0645\u0633\u0624\u0648\u0644\u064a\u0627\u062a \u0628\u062a\u0631\u062a\u064a\u0628 \u0627\u0644\u0623\u0647\u0645\u064a\u0629. \u0646\u0633\u0628\u0629 \u0643\u0644 \u0645\u0633\u0624\u0648\u0644\u064a\u0629 \u2264 25\u066a. \u0627\u0644\u0645\u062c\u0645\u0648\u0639 = 100\u066a.',
+      weightLabel:'\u0625\u062c\u0645\u0627\u0644\u064a \u0627\u0644\u0646\u0633\u0628\u0629:',weightOf100:'/ 100\u066a',
+      weightWarn:'\u26a0 \u0627\u0644\u0645\u062c\u0645\u0648\u0639 \u064a\u062a\u062c\u0627\u0648\u0632 100\u066a.',
+      addResp:'+ \u0625\u0636\u0627\u0641\u0629 \u0645\u0633\u0624\u0648\u0644\u064a\u0629',
+      guidanceTrigger:'\u2736 \u0627\u0642\u062a\u0631\u0627\u062d\u0627\u062a \u0630\u0643\u064a\u0629',
+      guidanceTitle:'\u0645\u0633\u0624\u0648\u0644\u064a\u0627\u062a \u0645\u0642\u062a\u0631\u062d\u0629 \u2014 \u0627\u0636\u063a\u0637 + \u0644\u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645',
+      skillsIntro:'<strong>\u0645\u0647\u0627\u0631\u0627\u062a \u0630\u0643\u064a\u0629</strong> \u2014 \u0627\u062e\u062a\u0631 3 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644 \u0645\u0646 \u0643\u0644 \u0641\u0626\u0629.',
+      softTitle:'\u0627\u0644\u0645\u0647\u0627\u0631\u0627\u062a \u0627\u0644\u0634\u062e\u0635\u064a\u0629',compTitle:'\u0645\u0647\u0627\u0631\u0627\u062a \u0627\u0644\u062d\u0627\u0633\u0628 \u0648\u0627\u0644\u062a\u0642\u0646\u064a\u0629',techTitle:'\u0627\u0644\u0645\u0647\u0627\u0631\u0627\u062a \u0627\u0644\u062a\u0642\u0646\u064a\u0629 \u0627\u0644\u0645\u0647\u0646\u064a\u0629',
+      minSelected:' \u0645\u062d\u062f\u062f / \u0627\u0644\u062d\u062f \u0627\u0644\u0623\u062f\u0646\u0649 3',
+      skillsErrSoft:'\u26a0 \u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 3 \u0645\u0647\u0627\u0631\u0627\u062a \u0634\u062e\u0635\u064a\u0629.',
+      skillsErrComp:'\u26a0 \u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 3 \u0645\u0647\u0627\u0631\u0627\u062a \u062d\u0627\u0633\u0628.',
+      skillsErrTech:'\u26a0 \u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 3 \u0645\u0647\u0627\u0631\u0627\u062a \u062a\u0642\u0646\u064a\u0629.',
+      required:'\u0647\u0630\u0627 \u0627\u0644\u062d\u0642\u0644 \u0645\u0637\u0644\u0648\u0628.',selectRequired:'\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0623\u062d\u062f \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a.',
+      deptRequired:'\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0627\u0644\u0642\u0633\u0645.',respRequired:'\u064a\u0631\u062c\u0649 \u0625\u0643\u0645\u0627\u0644 \u0647\u0630\u0647 \u0627\u0644\u0645\u0633\u0624\u0648\u0644\u064a\u0629.',
+      btnNext:'\u0627\u0644\u062a\u0627\u0644\u064a \u2192',btnBack:'\u2190 \u0631\u062c\u0648\u0639',btnSubmit:'\u2713 \u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u0627\u0633\u062a\u0645\u0627\u0631\u0629',
+      succTitle:'\u062a\u0645 \u0627\u0644\u0625\u0631\u0633\u0627\u0644 \u0628\u0646\u062c\u0627\u062d!',
+      succSub:'\u0634\u0643\u0631\u0627\u064b. \u0633\u064a\u0642\u0648\u0645 \u0641\u0631\u064a\u0642 \u0627\u0644\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u062a\u0646\u0638\u064a\u0645\u064a \u0628\u0627\u0644\u0645\u0631\u0627\u062c\u0639\u0629 \u062e\u0644\u0627\u0644 3-5 \u0623\u064a\u0627\u0645.',
+      succStatus:'\u0642\u064a\u062f \u0627\u0644\u0645\u0631\u0627\u062c\u0639\u0629',
+      succStatusText:'\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0627\u0633\u062a\u0645\u0627\u0631\u0629 \u062a\u062d\u0644\u064a\u0644 \u0627\u0644\u0648\u0638\u064a\u0641\u0629 \u0648\u0647\u064a \u0627\u0644\u0622\u0646 \u0642\u064a\u062f \u0645\u0631\u0627\u062c\u0639\u0629 \u0641\u0631\u064a\u0642 \u0627\u0644\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u062a\u0646\u0638\u064a\u0645\u064a.',
+      succWfTitle:'\u0627\u0644\u062e\u0637\u0648\u0627\u062a \u0627\u0644\u062a\u0627\u0644\u064a\u0629 \u0641\u064a \u0637\u0644\u0628\u0643',
+      succWfA:'\u062a\u0645 \u0627\u0644\u0625\u0631\u0633\u0627\u0644',succWfB:'\u0645\u0631\u0627\u062c\u0639\u0629 OD',succWfC:'\u0639\u0645\u0644\u064a\u0629 TA',succWfD:'\u0627\u0644\u0627\u062e\u062a\u064a\u0627\u0631',
+      succPrint:'\u0637\u0628\u0627\u0639\u0629 / PDF',succRestart:'\u0625\u0631\u0633\u0627\u0644 \u0627\u0633\u062a\u0645\u0627\u0631\u0629 \u062c\u062f\u064a\u062f\u0629',
+      succRef:'\u064a\u0631\u062c\u0649 \u0627\u0644\u0627\u062d\u062a\u0641\u0627\u0638 \u0628\u0647\u0630\u0627 \u0627\u0644\u062a\u0623\u0643\u064a\u062f.',
+      succLblJob:'\u0627\u0644\u0645\u0633\u0645\u0649 \u0627\u0644\u0648\u0638\u064a\u0641\u064a',succLblSector:'\u0627\u0644\u0642\u0637\u0627\u0639',succLblDept:'\u0627\u0644\u0642\u0633\u0645',
+      respLabel:'\u0645\u0633\u0624\u0648\u0644\u064a\u0629',respOptional:'\u0627\u062e\u062a\u064a\u0627\u0631\u064a',respRequired2:'\u0625\u0644\u0632\u0627\u0645\u064a',
+      respDescPh:'\u0627\u0643\u062a\u0628 \u0627\u0644\u0645\u0633\u0624\u0648\u0644\u064a\u0629 \u0628\u0648\u0636\u0648\u062d\u2026',
+      respActionPh:'\u0627\u0644\u0625\u062c\u0631\u0627\u0621\u0627\u062a \u0648\u0627\u0644\u0645\u062e\u0631\u062c\u0627\u062a\u2026',respWeightPh:'% \u0627\u0644\u0646\u0633\u0628\u0629',
+      selSector:'\u2014 \u0627\u062e\u062a\u0631 \u0627\u0644\u0642\u0637\u0627\u0639 \u2014',selDept:'\u2014 \u0627\u062e\u062a\u0631 \u0627\u0644\u0642\u0633\u0645 \u2014',
+      selEdu:'\u2014 \u0627\u062e\u062a\u0631 \u2014',selExp:'\u2014 \u0627\u062e\u062a\u0631 \u2014',selLoc:'\u2014 \u0627\u062e\u062a\u0631 \u2014',selEng:'\u2014 \u0627\u062e\u062a\u0631 \u2014',
+      eduLiteracy:'\u0645\u0639\u0631\u0641\u0629 \u0627\u0644\u0642\u0631\u0627\u0621\u0629 \u0648\u0627\u0644\u0643\u062a\u0627\u0628\u0629',eduPrep:'\u0625\u0639\u062f\u0627\u062f\u064a',eduVoc:'\u062b\u0627\u0646\u0648\u064a \u0645\u0647\u0646\u064a',
+      eduSec:'\u062b\u0627\u0646\u0648\u064a \u0639\u0627\u0645',eduDip:'\u062f\u0628\u0644\u0648\u0645',eduBach:'\u0628\u0643\u0627\u0644\u0648\u0631\u064a\u0648\u0633',eduMaster:'\u0645\u0627\u062c\u0633\u062a\u064a\u0631',eduPhd:'\u062f\u0643\u062a\u0648\u0631\u0627\u0647',
+      expNone:'\u0644\u0627 \u064a\u0634\u062a\u0631\u0637',expLt1:'\u0623\u0642\u0644 \u0645\u0646 \u0633\u0646\u0629',exp12:'1\u20132 \u0633\u0646\u0648\u0627\u062a',exp35:'3\u20135 \u0633\u0646\u0648\u0627\u062a',exp610:'6\u201310 \u0633\u0646\u0648\u0627\u062a',exp10p:'\u0623\u0643\u062b\u0631 \u0645\u0646 10 \u0633\u0646\u0648\u0627\u062a',
+      locHead:'\u0627\u0644\u0645\u0642\u0631 \u0627\u0644\u0631\u0626\u064a\u0633\u064a',locAlex:'\u0641\u0631\u0639 \u0627\u0644\u0625\u0633\u0643\u0646\u062f\u0631\u064a\u0629',locHelio:'\u0641\u0631\u0639 \u0645\u0635\u0631 \u0627\u0644\u062c\u062f\u064a\u062f\u0629',
+      locMobica:'\u0645\u0635\u0646\u0639 \u0645\u0648\u0628\u064a\u0643\u0627',locIvend:'\u0645\u0635\u0646\u0639 \u0627\u064a\u0641\u064a\u0646\u062f',locBlue:'\u0628\u0644\u0648 \u062c\u0631\u0627\u0648\u0646\u062f',locAuto:'\u0645\u0635\u0646\u0639 \u0627\u0644\u0633\u064a\u0627\u0631\u0627\u062a',
+      engNone:'\u063a\u064a\u0631 \u0645\u0637\u0644\u0648\u0628',engBeg:'\u0645\u0628\u062a\u062f\u0626',engGood:'\u062c\u064a\u062f',engVg:'\u062c\u064a\u062f \u062c\u062f\u0627\u064b',engExc:'\u0645\u0645\u062a\u0627\u0632',engFluent:'\u0637\u0644\u0627\u0642\u0629 \u062a\u0627\u0645\u0629',
+      sectors:['\u0627\u0644\u062a\u0635\u0646\u064a\u0639','\u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629','\u0627\u0644\u0645\u0627\u0644\u064a\u0629','\u0627\u0644\u062a\u062c\u0627\u0631\u064a','\u0627\u0644\u0635\u062d\u0629 \u0648\u0627\u0644\u0633\u0644\u0627\u0645\u0629','\u062a\u0642\u0646\u064a\u0629 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a','\u0627\u0644\u062c\u0648\u062f\u0629','\u0633\u0644\u0633\u0644\u0629 \u0627\u0644\u0625\u0645\u062f\u0627\u062f','\u0627\u0644\u0645\u0643\u062a\u0628 \u0627\u0644\u0641\u0646\u064a','\u062a\u0635\u0645\u064a\u0645 \u0627\u0644\u0645\u0646\u062a\u062c','\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0623\u0639\u0645\u0627\u0644'],
+      externals:['\u0627\u0644\u0639\u0645\u0644\u0627\u0621','\u0627\u0644\u0645\u0642\u0627\u0648\u0644\u0648\u0646 \u0645\u0646 \u0627\u0644\u0628\u0627\u0637\u0646','\u062c\u0647\u0627\u062a \u062d\u0643\u0648\u0645\u064a\u0629','\u0627\u0644\u0645\u0648\u0631\u062f\u0648\u0646','\u0627\u0644\u062c\u0627\u0645\u0639\u0627\u062a']
+    }
+  };
+
+  /* ─── DATA ─── */
+  var SECTOR_DEPTS = {
+    'Manufacturing':['Plastic Factory','Metal Furniture Factory','Aluminum Factory','Natural Wood','Felt Factory','Installation','Chairs & Sofas Factory','Melamine Factory'],
+    'Human Resources':['Recruitment','OD','Personnel','Payroll','Benefits','Security','Administration','Legal Affairs'],
+    'Finance':['Financial Controlling','Financial Audit','Accounting','Investments','Import Compliance & Investment Operations'],
+    'Supply Chain':['Warehouse','Planning Procurement','Sourcing','Export']
+  };
+  var SECTOR_DEPTS_AR = {
+    '\u0627\u0644\u062a\u0635\u0646\u064a\u0639':['\u0645\u0635\u0646\u0639 \u0627\u0644\u0628\u0644\u0627\u0633\u062a\u064a\u0643','\u0645\u0635\u0646\u0639 \u0627\u0644\u0623\u062b\u0627\u062b \u0627\u0644\u0645\u0639\u062f\u0646\u064a','\u0645\u0635\u0646\u0639 \u0627\u0644\u0623\u0644\u0648\u0645\u0646\u064a\u0648\u0645','\u0627\u0644\u062e\u0634\u0628 \u0627\u0644\u0637\u0628\u064a\u0639\u064a','\u0645\u0635\u0646\u0639 \u0627\u0644\u0644\u0628\u0627\u062f','\u0642\u0633\u0645 \u0627\u0644\u062a\u0631\u0643\u064a\u0628','\u0645\u0635\u0646\u0639 \u0627\u0644\u0643\u0631\u0627\u0633\u064a \u0648\u0627\u0644\u0627\u0646\u062a\u0631\u064a\u0647\u0627\u062a','\u0645\u0635\u0646\u0639 \u0627\u0644\u0645\u064a\u0644\u0627\u0645\u064a\u0646'],
+    '\u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629':['\u0627\u0644\u0627\u0633\u062a\u0642\u0637\u0627\u0628','\u0627\u0644\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u062a\u0646\u0638\u064a\u0645\u064a','\u0634\u0624\u0648\u0646 \u0627\u0644\u0645\u0648\u0638\u0641\u064a\u0646','\u0627\u0644\u0631\u0648\u0627\u062a\u0628','\u0627\u0644\u0645\u0632\u0627\u064a\u0627','\u0627\u0644\u0623\u0645\u0646','\u0627\u0644\u0625\u062f\u0627\u0631\u0629','\u0627\u0644\u0634\u0624\u0648\u0646 \u0627\u0644\u0642\u0627\u0646\u0648\u0646\u064a\u0629'],
+    '\u0627\u0644\u0645\u0627\u0644\u064a\u0629':['\u0627\u0644\u0636\u0628\u0637 \u0627\u0644\u0645\u0627\u0644\u064a','\u0627\u0644\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u0645\u0627\u0644\u064a\u0629','\u0627\u0644\u0645\u062d\u0627\u0633\u0628\u0629','\u0627\u0644\u0627\u0633\u062a\u062b\u0645\u0627\u0631\u0627\u062a','\u0627\u0644\u0627\u0645\u062a\u062b\u0627\u0644 \u0644\u0644\u0627\u0633\u062a\u064a\u0631\u0627\u062f'],
+    '\u0633\u0644\u0633\u0644\u0629 \u0627\u0644\u0625\u0645\u062f\u0627\u062f':['\u0627\u0644\u0645\u0633\u062a\u0648\u062f\u0639','\u062a\u062e\u0637\u064a\u0637 \u0627\u0644\u0645\u0634\u062a\u0631\u064a\u0627\u062a','\u0627\u0644\u062a\u0648\u0631\u064a\u062f','\u0627\u0644\u062a\u0635\u062f\u064a\u0631']
+  };
+  var GUIDANCE = {
+    en:['Manage end-to-end processes to achieve departmental objectives efficiently.','Prepare regular status reports and communicate progress to line manager.','Collaborate with cross-functional teams to ensure smooth workflow.','Identify process improvement opportunities and propose actionable solutions.','Ensure all work is completed in accordance with company policies and quality standards.','Monitor key performance indicators and take corrective action when needed.','Develop and maintain productive working relationships with internal stakeholders.','Support the annual planning cycle and contribute to department goal-setting.','Coordinate with relevant teams to resolve issues promptly and effectively.','Maintain professional knowledge through continuous learning and benchmarking.'],
+    ar:['\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a \u0627\u0644\u0634\u0627\u0645\u0644\u0629 \u0644\u062a\u062d\u0642\u064a\u0642 \u0623\u0647\u062f\u0627\u0641 \u0627\u0644\u0642\u0633\u0645 \u0628\u0643\u0641\u0627\u0621\u0629.','\u0625\u0639\u062f\u0627\u062f \u062a\u0642\u0627\u0631\u064a\u0631 \u0627\u0644\u062d\u0627\u0644\u0629 \u0627\u0644\u062f\u0648\u0631\u064a\u0629 \u0648\u0625\u0628\u0644\u0627\u063a \u0627\u0644\u0645\u062f\u064a\u0631 \u0627\u0644\u0645\u0628\u0627\u0634\u0631.','\u0627\u0644\u062a\u0639\u0627\u0648\u0646 \u0645\u0639 \u0627\u0644\u0641\u0631\u0642 \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u0648\u0638\u0627\u0626\u0641.','\u062a\u062d\u062f\u064a\u062f \u0641\u0631\u0635 \u062a\u062d\u0633\u064a\u0646 \u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a \u0648\u0627\u0642\u062a\u0631\u0627\u062d \u062d\u0644\u0648\u0644.','\u0636\u0645\u0627\u0646 \u0625\u0646\u062c\u0627\u0632 \u0627\u0644\u0623\u0639\u0645\u0627\u0644 \u0648\u0641\u0642\u0627\u064b \u0644\u0633\u064a\u0627\u0633\u0627\u062a \u0627\u0644\u0634\u0631\u0643\u0629.','\u0645\u0631\u0627\u0642\u0628\u0629 \u0645\u0624\u0634\u0631\u0627\u062a \u0627\u0644\u0623\u062f\u0627\u0621 \u0648\u0627\u062a\u062e\u0627\u0630 \u0627\u0644\u0625\u062c\u0631\u0627\u0621\u0627\u062a \u0627\u0644\u062a\u0635\u062d\u064a\u062d\u064a\u0629.','\u062a\u0637\u0648\u064a\u0631 \u0639\u0644\u0627\u0642\u0627\u062a \u0639\u0645\u0644 \u0645\u0646\u062a\u062c\u0629.','\u062f\u0639\u0645 \u062f\u0648\u0631\u0629 \u0627\u0644\u062a\u062e\u0637\u064a\u0637 \u0627\u0644\u0633\u0646\u0648\u064a.','\u0627\u0644\u062a\u0646\u0633\u064a\u0642 \u0645\u0639 \u0627\u0644\u0641\u0631\u0642 \u0644\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0627\u062a.','\u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0645\u0639\u0631\u0641\u0629 \u0627\u0644\u0645\u0647\u0646\u064a\u0629 \u0628\u0627\u0633\u062a\u0645\u0631\u0627\u0631.']
+  };
+  var SKILLS = {
+    en:{
+      soft:['Communication','Problem Solving','Teamwork','Attention to Detail','Time Management','Adaptability','Initiative','Critical Thinking','Emotional Intelligence','Conflict Resolution','Coaching & Mentoring','Negotiation','Analytical Thinking','Integrity','Decision Making','Customer Focus'],
+      computer:['Microsoft Office (Word, Excel, PowerPoint)','Email & Outlook','Video Conferencing','Excel \u2013 Advanced','Power BI','SAP','HRIS Systems','ERP Systems','Microsoft Teams','AutoCAD','Project Management Tools'],
+      technical:['Report Writing','Process Documentation','Data Analysis','Project Coordination','Job Analysis & Evaluation','Competency Framework Design','Egyptian Labour Law','Performance Management','Financial Analysis','Budget Preparation','Lean Manufacturing / Kaizen','5S Methodology','Risk Assessment','ISO Standards','Procurement Process']
+    },
+    ar:{
+      soft:['\u0627\u0644\u062a\u0648\u0627\u0635\u0644 \u0627\u0644\u0641\u0639\u0627\u0644','\u062d\u0644 \u0627\u0644\u0645\u0634\u0643\u0644\u0627\u062a','\u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u062c\u0645\u0627\u0639\u064a','\u0627\u0644\u0627\u0647\u062a\u0645\u0627\u0645 \u0628\u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644','\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0648\u0642\u062a','\u0627\u0644\u062a\u0643\u064a\u0641','\u0627\u0644\u0645\u0628\u0627\u062f\u0631\u0629','\u0627\u0644\u062a\u0641\u0643\u064a\u0631 \u0627\u0644\u0646\u0642\u062f\u064a','\u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0639\u0627\u0637\u0641\u064a','\u062d\u0644 \u0627\u0644\u0646\u0632\u0627\u0639\u0627\u062a','\u0627\u0644\u062a\u062f\u0631\u064a\u0628 \u0648\u0627\u0644\u0625\u0631\u0634\u0627\u062f','\u0627\u0644\u062a\u0641\u0627\u0648\u0636','\u0627\u0644\u062a\u0641\u0643\u064a\u0631 \u0627\u0644\u062a\u062d\u0644\u064a\u0644\u064a','\u0627\u0644\u0646\u0632\u0627\u0647\u0629','\u0627\u062a\u062e\u0627\u0630 \u0627\u0644\u0642\u0631\u0627\u0631','\u0627\u0644\u062a\u0648\u062c\u0647 \u0646\u062d\u0648 \u0627\u0644\u0639\u0645\u0644\u0627\u0621'],
+      computer:['\u0645\u0627\u064a\u0643\u0631\u0648\u0633\u0648\u0641\u062a \u0623\u0648\u0641\u064a\u0633','\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a','\u0645\u0624\u062a\u0645\u0631\u0627\u062a \u0627\u0644\u0641\u064a\u062f\u064a\u0648','\u0625\u0643\u0633\u064a\u0644 \u0645\u062a\u0642\u062f\u0645','Power BI','SAP','\u0623\u0646\u0638\u0645\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629','\u0623\u0646\u0638\u0645\u0629 ERP','\u0645\u0627\u064a\u0643\u0631\u0648\u0633\u0648\u0641\u062a \u062a\u064a\u0645\u0632','AutoCAD','\u0623\u062f\u0648\u0627\u062a \u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639'],
+      technical:['\u0643\u062a\u0627\u0628\u0629 \u0627\u0644\u062a\u0642\u0627\u0631\u064a\u0631','\u062a\u0648\u062b\u064a\u0642 \u0627\u0644\u0639\u0645\u0644\u064a\u0627\u062a','\u062a\u062d\u0644\u064a\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a','\u062a\u0646\u0633\u064a\u0642 \u0627\u0644\u0645\u0634\u0627\u0631\u064a\u0639','\u062a\u062d\u0644\u064a\u0644 \u0648\u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u0648\u0638\u0627\u0626\u0641','\u0625\u0637\u0627\u0631 \u0627\u0644\u0643\u0641\u0627\u0621\u0627\u062a','\u0642\u0627\u0646\u0648\u0646 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u0635\u0631\u064a','\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0623\u062f\u0627\u0621','\u0627\u0644\u062a\u062d\u0644\u064a\u0644 \u0627\u0644\u0645\u0627\u0644\u064a','\u0625\u0639\u062f\u0627\u062f \u0627\u0644\u0645\u064a\u0632\u0627\u0646\u064a\u0629','\u0627\u0644\u062a\u0635\u0646\u064a\u0639 \u0627\u0644\u0631\u0634\u064a\u0642','\u0645\u0646\u0647\u062c\u064a\u0629 5S','\u062a\u0642\u064a\u064a\u0645 \u0627\u0644\u0645\u062e\u0627\u0637\u0631','\u0645\u0639\u0627\u064a\u064a\u0631 ISO','\u0639\u0645\u0644\u064a\u0629 \u0627\u0644\u0645\u0634\u062a\u0631\u064a\u0627\u062a']
+    }
+  };
+
+  /* ─── STATE ─── */
+  var lang = 'en';
+  var step = 0;
+  var worksWithSel = [];
+  var respCount = 0;
+
+  /* ─── HELPERS ─── */
+  function t(k) { return (T[lang] && T[lang][k] !== undefined) ? T[lang][k] : (T.en[k] || k); }
+  function el(id) { return document.getElementById(id); }
+  function setText(id, txt) { var e = el(id); if (e) e.textContent = txt; }
+  function setHTML(id, html) { var e = el(id); if (e) e.innerHTML = html; }
+
+  function buildSelect(id, items, labelKey) {
+    var s = el(id); if (!s) return;
+    var prev = s.value; s.innerHTML = '';
+    var def = document.createElement('option'); def.value = ''; def.textContent = t(labelKey); s.appendChild(def);
+    items.forEach(function(item) { var o = document.createElement('option'); o.value = item; o.textContent = item; if (item === prev) o.selected = true; s.appendChild(o); });
+  }
+
+  /* ─── LANGUAGE ─── */
+  function selectLanguage(l) {
+    lang = l;
+    document.body.className = l === 'ar' ? 'lang-ar' : '';
+    showWorkflow();
+  }
+
+  function showWorkflow() {
+    el('langScreen').style.display = 'none';
+    el('workflowScreen').style.display = 'block';
+    el('formScreen').style.display = 'none';
+    renderWorkflow();
+  }
+
+  function showForm() {
+    el('workflowScreen').style.display = 'none';
+    el('formScreen').style.display = 'block';
+    initForm();
+  }
+
+  function backToLang() {
+    el('langScreen').style.display = 'flex';
+    el('workflowScreen').style.display = 'none';
+    el('formScreen').style.display = 'none';
+  }
+
+  function renderWorkflow() {
+    setText('wfHeaderTitle', t('wfHeaderTitle'));
+    setText('wfTitle', t('wfTitle'));
+    setText('wfSubtitle', t('wfSubtitle'));
+    setText('wfBackBtn', t('langSwitch'));
+    ['A','B','C','D'].forEach(function(k) {
+      setText('wfStep' + k, t('wfStep' + k));
+      setText('wfTitle' + k, t('wfTitle' + k));
+      setText('wfDesc' + k, t('wfDesc' + k));
+    });
+    setText('wfStartBtn', t('wfStart'));
+  }
+
+  /* ─── FORM INIT ─── */
+  function initForm() {
+    renderStatic();
+    buildSectorDropdown();
+    buildEduSelect();
+    buildExpSelect();
+    buildLocSelect();
+    buildEngSelect();
+    buildMultiSelect();
+    buildExternalCbs();
+    buildResponsibilities();
+    buildSkills();
+    updateProgress();
+  }
+
+  function renderStatic() {
+    setText('formHeaderTitle', t('formTitle'));
+    setText('formHeaderSub', t('formSub'));
+    setText('formBadge', t('formBadge'));
+    setText('formBackBtn', t('langSwitch'));
+    for (var i = 1; i <= 5; i++) setText('tab' + i, t('tab' + i));
+    ['1','2','3','4','5'].forEach(function(n) { setText('s' + n + 'en', t('s' + n + 'en')); setText('s' + n + 'ar', t('s' + n + 'ar')); });
+    var lbls = ['email','email_ar','jobTitleEn','jobTitleEnAr','jobTitleAr','jobTitleArAr','sector','dept','reportsTo','edu','exp','loc','purpose','worksWith','external','eng'];
+    lbls.forEach(function(k) { setText('lbl_' + k, t('lbl_' + k)); });
+    setText('purposeHint', t('purposeHint'));
+    setText('worksWithHint', t('worksWithHint'));
+    setText('s3sub1', t('s3sub1')); setText('s3sub2', t('s3sub2'));
+    var emailEl = el('managerEmail'); if (emailEl) emailEl.placeholder = t('emailPh');
+    var jte = el('jobTitleEn'); if (jte) jte.placeholder = 'e.g. HR Business Partner';
+    var jta = el('jobTitleAr'); if (jta) jta.placeholder = lang === 'ar' ? '\u0645\u062b\u0627\u0644: \u0634\u0631\u064a\u0643 \u0623\u0639\u0645\u0627\u0644' : '\u0645\u062b\u0627\u0644: \u0634\u0631\u064a\u0643 \u0623\u0639\u0645\u0627\u0644';
+    var rt = el('reportsTo'); if (rt) rt.placeholder = lang === 'ar' ? '\u0623\u062f\u062e\u0644 \u0627\u0633\u0645 \u0627\u0644\u0645\u062f\u064a\u0631 \u0627\u0644\u0645\u0628\u0627\u0634\u0631' : 'Enter direct manager name';
+    setText('respInfo', t('respInfo'));
+    setText('weightLabelText', t('weightLabel')); setText('weightOf100', t('weightOf100'));
+    setText('weightWarn', t('weightWarn')); setText('addRespBtn', t('addResp'));
+    setHTML('skillsIntro', t('skillsIntro'));
+    setText('softGroupTitle', t('softTitle')); setText('compGroupTitle', t('compTitle')); setText('techGroupTitle', t('techTitle'));
+    setText('softCounterLabel', t('minSelected')); setText('compCounterLabel', t('minSelected')); setText('techCounterLabel', t('minSelected'));
+    setText('s1next', t('btnNext'));
+    setText('s2back', t('btnBack')); setText('s2next', t('btnNext'));
+    setText('s3back', t('btnBack')); setText('s3next', t('btnNext'));
+    setText('s4back', t('btnBack')); setText('s4next', t('btnNext'));
+    setText('s5back', t('btnBack')); setText('s5submit', t('btnSubmit'));
+  }
+
+  /* ─── DROPDOWNS ─── */
+  function buildSectorDropdown() {
+    var sectors = t('sectors'); var s = el('sector'); if (!s) return;
+    s.innerHTML = '';
+    var def = document.createElement('option'); def.value = ''; def.textContent = t('selSector'); s.appendChild(def);
+    sectors.forEach(function(sec) { var o = document.createElement('option'); o.value = sec; o.textContent = sec; s.appendChild(o); });
+    el('deptField').classList.add('hidden');
+  }
+
+  function onSectorChange() {
+    var sec = el('sector').value;
+    var depts = (lang === 'ar' ? SECTOR_DEPTS_AR : SECTOR_DEPTS)[sec] || [];
+    var df = el('deptField');
+    if (depts.length) { df.classList.remove('hidden'); buildSelect('department', depts, 'selDept'); el('department').required = true; }
+    else { df.classList.add('hidden'); el('department').required = false; el('department').value = ''; }
+  }
+
+  function buildEduSelect() {
+    var keys = ['Literacy','Prep','Voc','Sec','Dip','Bach','Master','Phd'];
+    var s = el('education'); if (!s) return;
+    s.innerHTML = '<option value="">' + t('selEdu') + '</option>';
+    keys.forEach(function(k) { var o = document.createElement('option'); o.value = k.toLowerCase(); o.textContent = t('edu' + k); s.appendChild(o); });
+  }
+
+  function buildExpSelect() {
+    var keys = ['None','Lt1','12','35','610','10p']; var vals = ['none','lt1','1-2','3-5','6-10','10+'];
+    var s = el('experience'); if (!s) return;
+    s.innerHTML = '<option value="">' + t('selExp') + '</option>';
+    keys.forEach(function(k, i) { var o = document.createElement('option'); o.value = vals[i]; o.textContent = t('exp' + k); s.appendChild(o); });
+  }
+
+  function buildLocSelect() {
+    var keys = ['Head','Alex','Helio','Mobica','Ivend','Blue','Auto'];
+    var s = el('workLocation'); if (!s) return;
+    s.innerHTML = '<option value="">' + t('selLoc') + '</option>';
+    keys.forEach(function(k) { var o = document.createElement('option'); o.value = k.toLowerCase(); o.textContent = t('loc' + k); s.appendChild(o); });
+  }
+
+  function buildEngSelect() {
+    var keys = ['None','Beg','Good','Vg','Exc','Fluent'];
+    var s = el('englishLevel'); if (!s) return;
+    s.innerHTML = '<option value="">' + t('selEng') + '</option>';
+    keys.forEach(function(k) { var o = document.createElement('option'); o.value = k.toLowerCase(); o.textContent = t('eng' + k); s.appendChild(o); });
+  }
+
+  /* ─── MULTI SELECT ─── */
+  function buildMultiSelect() {
+    var sectors = t('sectors'); var drop = el('worksWithDropdown');
+    drop.innerHTML = ''; worksWithSel = [];
+    sectors.forEach(function(item) {
+      var div = document.createElement('div'); div.className = 'multi-opt'; div.dataset.value = item;
+      var cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = item;
+      cb.addEventListener('change', function(e) {
+        e.stopPropagation();
+        if (this.checked) { if (worksWithSel.indexOf(item) < 0) worksWithSel.push(item); div.classList.add('selected'); }
+        else { worksWithSel = worksWithSel.filter(function(s) { return s !== item; }); div.classList.remove('selected'); }
+        renderTags();
+      });
+      div.appendChild(cb); div.appendChild(document.createTextNode(' ' + item));
+      div.addEventListener('click', function(e) { if (e.target.tagName !== 'INPUT') { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); } });
+      drop.appendChild(div);
+    });
+    el('worksWithBtn').textContent = t('worksWithPlaceholder');
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#worksWithWrap')) { el('worksWithDropdown').classList.remove('open'); el('worksWithBtn').classList.remove('open'); }
+    });
+  }
+
+  function toggleMulti() { el('worksWithDropdown').classList.toggle('open'); el('worksWithBtn').classList.toggle('open'); }
+
+  function renderTags() {
+    var wrap = el('worksWithTags'); wrap.innerHTML = '';
+    worksWithSel.forEach(function(item) {
+      var tag = document.createElement('div'); tag.className = 'multi-tag';
+      var txt = document.createTextNode(item + ' ');
+      var rm = document.createElement('span'); rm.className = 'multi-tag-remove'; rm.textContent = '\u00d7';
+      rm.addEventListener('click', function() { removeWorksTag(item); });
+      tag.appendChild(txt); tag.appendChild(rm); wrap.appendChild(tag);
+    });
+    el('worksWithBtn').textContent = worksWithSel.length ? worksWithSel.length + (lang === 'ar' ? ' \u0642\u0637\u0627\u0639 \u0645\u062e\u062a\u0627\u0631' : ' sector(s) selected') : t('worksWithPlaceholder');
+  }
+
+  function removeWorksTag(item) {
+    worksWithSel = worksWithSel.filter(function(s) { return s !== item; });
+    var opt = el('worksWithDropdown').querySelector('[data-value="' + item + '"]');
+    if (opt) { opt.classList.remove('selected'); var cb = opt.querySelector('input'); if (cb) cb.checked = false; }
+    renderTags();
+  }
+
+  /* ─── EXTERNAL CBS ─── */
+  function buildExternalCbs() {
+    var items = t('externals'); var c = el('externalCbs'); c.innerHTML = '';
+    items.forEach(function(item) {
+      var lbl = document.createElement('label'); lbl.className = 'cb-item';
+      var cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = item;
+      cb.addEventListener('change', function() { lbl.classList.toggle('checked', cb.checked); });
+      lbl.appendChild(cb); lbl.appendChild(document.createTextNode(' ' + item)); c.appendChild(lbl);
+    });
+  }
+
+  /* ─── RESPONSIBILITIES ─── */
+  function buildResponsibilities() {
+    el('respContainer').innerHTML = ''; respCount = 0;
+    for (var i = 0; i < 5; i++) addResp(true);
+  }
+
+  function addResp(mandatory) {
+    if (respCount >= 10) { el('addRespBtn').style.display = 'none'; return; }
+    respCount++; var n = respCount; var isMand = mandatory === true;
+    var block = document.createElement('div'); block.className = 'resp-block'; block.id = 'rb-' + n;
+    var hdr = document.createElement('div'); hdr.className = 'resp-block-hdr';
+    var badge = document.createElement('div'); badge.className = 'resp-badge-wrap';
+    var num = document.createElement('span'); num.className = 'resp-num'; num.textContent = n;
+    var lbl = document.createElement('span'); lbl.className = 'resp-lbl'; lbl.textContent = t('respLabel') + ' #' + n;
+    var opt = document.createElement('span'); opt.className = 'resp-optional'; opt.style.color = isMand ? 'var(--red)' : 'var(--gray-300)'; opt.textContent = isMand ? t('respRequired2') : t('respOptional');
+    badge.appendChild(num); badge.appendChild(lbl); badge.appendChild(opt); hdr.appendChild(badge);
+    if (!isMand) {
+      var rmBtn = document.createElement('button'); rmBtn.type = 'button'; rmBtn.className = 'remove-resp-btn'; rmBtn.textContent = '\u00d7';
+      (function(num2) { rmBtn.addEventListener('click', function() { removeResp(num2); }); })(n);
+      hdr.appendChild(rmBtn);
+    }
+    block.appendChild(hdr);
+    var grid = document.createElement('div'); grid.className = 'resp-grid';
+    var desc = document.createElement('input'); desc.type = 'text'; desc.id = 'rd-' + n; desc.placeholder = t('respDescPh'); desc.required = isMand;
+    desc.addEventListener('focus', function() { block.classList.add('active-block'); });
+    desc.addEventListener('blur', function() { block.classList.remove('active-block'); });
+    grid.appendChild(desc);
+    var wWrap = document.createElement('div'); wWrap.style.position = 'relative';
+    var wgt = document.createElement('input'); wgt.type = 'number'; wgt.id = 'rw-' + n; wgt.placeholder = t('respWeightPh'); wgt.min = 1; wgt.max = 25; wgt.required = isMand; wgt.style.paddingRight = '24px';
+    wgt.addEventListener('input', updateWeight);
+    var pct = document.createElement('span'); pct.textContent = '%'; pct.style.cssText = 'position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--gray-300);pointer-events:none;';
+    wWrap.appendChild(wgt); wWrap.appendChild(pct); grid.appendChild(wWrap); block.appendChild(grid);
+    var ta = document.createElement('textarea'); ta.id = 'ra-' + n; ta.placeholder = t('respActionPh'); ta.rows = 2; ta.required = isMand;
+    block.appendChild(ta);
+    var err = document.createElement('div'); err.className = 'err-msg'; err.id = 're-' + n; err.textContent = t('respRequired'); block.appendChild(err);
+    block.appendChild(buildGuidance(n));
+    el('respContainer').appendChild(block);
+    if (respCount >= 10) el('addRespBtn').style.display = 'none';
+    updateWeight();
+  }
+
+  function removeResp(n) { var b = el('rb-' + n); if (b) b.remove(); el('addRespBtn').style.display = ''; updateWeight(); }
+
+  function buildGuidance(n) {
+    var panel = document.createElement('div'); panel.className = 'guidance-panel'; panel.id = 'gp-' + n;
+    var trig = document.createElement('button'); trig.type = 'button'; trig.className = 'guidance-trigger';
+    trig.innerHTML = '<span class="guidance-trigger-icon">\u2736</span>' + t('guidanceTrigger');
+    trig.addEventListener('click', function() { toggleGuidance(n); });
+    panel.appendChild(trig);
+    var body = document.createElement('div'); body.className = 'guidance-body'; body.id = 'gb-' + n; panel.appendChild(body);
+    return panel;
+  }
+
+  function toggleGuidance(n) {
+    var body = el('gb-' + n); if (!body) return;
+    if (body.classList.contains('open')) { body.classList.remove('open'); return; }
+    populateGuidance(n, body); body.classList.add('open');
+  }
+
+  function populateGuidance(n, body) {
+    var suggs = GUIDANCE[lang] || GUIDANCE.en; body.innerHTML = '<div class="guidance-section-title">' + t('guidanceTitle') + '</div>';
+    var usedVals = [];
+    document.querySelectorAll('[id^="rd-"]').forEach(function(inp) { if (inp.id !== 'rd-' + n && inp.value.trim()) usedVals.push(inp.value.trim()); });
+    suggs.forEach(function(text) {
+      var used = usedVals.indexOf(text) >= 0;
+      var item = document.createElement('div'); item.className = 'guidance-item' + (used ? ' used' : '');
+      var plus = document.createElement('span'); plus.className = 'guidance-plus'; plus.textContent = used ? '\u2713' : '+';
+      var span = document.createElement('span'); span.textContent = text;
+      item.appendChild(plus); item.appendChild(span);
+      if (!used) { item.addEventListener('click', function() { var f = el('rd-' + n); if (f) f.value = text; body.classList.remove('open'); }); }
+      body.appendChild(item);
+    });
+  }
+
+  function updateWeight() {
+    var total = 0;
+    document.querySelectorAll('[id^="rw-"]').forEach(function(inp) { var v = parseFloat(inp.value) || 0; if (v > 25) { inp.value = 25; v = 25; } total += v; });
+    total = Math.round(total * 10) / 10;
+    el('weightFill').style.width = Math.min(total, 100) + '%';
+    el('weightVal').textContent = total + '%';
+    el('weightFill').className = 'weight-fill' + (total > 100 ? ' over' : '');
+    el('weightVal').className = 'weight-val' + (total > 100 ? ' over' : total === 100 ? ' ok' : '');
+    el('weightTracker').className = 'weight-tracker' + (total > 100 ? ' warn' : total === 100 ? ' done-bg' : '');
+    el('weightWarn').classList.toggle('show', total > 100);
+  }
+
+  /* ─── SKILLS ─── */
+  function buildSkills() {
+    var s = SKILLS[lang] || SKILLS.en;
+    renderSkillGroup(s.soft, 'softSkillTags', 'softCnt', 'softErr');
+    renderSkillGroup(s.computer, 'compSkillTags', 'compCnt', 'compErr');
+    renderSkillGroup(s.technical, 'techSkillTags', 'techCnt', 'techErr');
+  }
+
+  function renderSkillGroup(items, tagsId, cntId, errId) {
+    var c = el(tagsId); if (!c) return; c.innerHTML = '';
+    items.forEach(function(item) {
+      var tag = document.createElement('span'); tag.className = 'skill-tag'; tag.dataset.value = item;
+      var chk = document.createElement('span'); chk.className = 'skill-check'; chk.textContent = '\u2713 ';
+      tag.appendChild(chk); tag.appendChild(document.createTextNode(item));
+      tag.addEventListener('click', function() { tag.classList.toggle('selected'); updateSkillCount(tagsId, cntId, errId); });
+      c.appendChild(tag);
+    });
+    updateSkillCount(tagsId, cntId, errId);
+  }
+
+  function updateSkillCount(tagsId, cntId, errId) {
+    var cnt = el(tagsId).querySelectorAll('.skill-tag.selected').length;
+    el(cntId).textContent = cnt;
+    var counter = el(cntId).closest('.skills-counter');
+    if (counter) { counter.classList.toggle('ok', cnt >= 3); counter.classList.toggle('fail', cnt > 0 && cnt < 3); }
+    if (cnt >= 3 && el(errId)) el(errId).classList.remove('show');
+  }
+
+  /* ─── PROGRESS & NAV ─── */
+  function updateProgress() {
+    el('progressFill').style.width = Math.round((step + 1) / 5 * 100) + '%';
+    el('progressLabel').textContent = t('sectionOf') + ' ' + (step + 1) + ' ' + t('of') + ' 5';
+    document.querySelectorAll('.step-tab').forEach(function(tab, i) {
+      tab.classList.remove('active', 'done');
+      var dot = tab.querySelector('.step-dot');
+      if (i < step) { tab.classList.add('done'); dot.textContent = '\u2713'; }
+      else if (i === step) { tab.classList.add('active'); dot.textContent = i + 1; }
+      else { dot.textContent = i + 1; }
+    });
+  }
+
+  function showSection(n) {
+    document.querySelectorAll('.section-card').forEach(function(c) { c.classList.remove('active'); });
+    el('successCard').classList.remove('active');
+    var sec = el('sec-' + n); if (sec) { sec.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    step = n; updateProgress();
+  }
+
+  function goNext(s) { if (validate(s)) showSection(s + 1); }
+  function goBack(s) { showSection(s - 1); }
+
+  /* ─── VALIDATION ─── */
+  function clearErr(id) { var e = el(id); if (e) e.classList.remove('invalid'); var em = el('err-' + id); if (em) em.classList.remove('show'); }
+  function showErr(id, msg) { var e = el(id); if (e) e.classList.add('invalid'); var em = el('err-' + id); if (em) { em.textContent = msg; em.classList.add('show'); } }
+
+  function validate(s) {
+    var ok = true;
+    if (s === 0) {
+      ['jobTitleEn','jobTitleAr','sector','reportsTo','education','experience','workLocation','managerEmail'].forEach(function(id) {
+        var e = el(id); if (!e) return;
+        if (!e.value.trim()) { showErr(id, e.tagName === 'SELECT' ? t('selectRequired') : t('required')); ok = false; }
+        else clearErr(id);
+      });
+      var emailEl = el('managerEmail');
+      if (emailEl && emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+        showErr('managerEmail', t('emailInvalid')); ok = false;
+      }
+      var df = el('deptField'); var dept = el('department');
+      if (df && !df.classList.contains('hidden') && dept && !dept.value.trim()) { showErr('department', t('deptRequired')); ok = false; }
+      else if (dept) clearErr('department');
+    }
+    if (s === 1) { var jp = el('jobPurpose'); if (!jp.value.trim()) { showErr('jobPurpose', t('required')); ok = false; } else clearErr('jobPurpose'); }
+    if (s === 3) {
+      for (var i = 1; i <= 5; i++) {
+        var d = el('rd-' + i); var w = el('rw-' + i); var e2 = el('re-' + i); if (!d) continue;
+        if (!d.value.trim() || !w || !w.value) {
+          if (e2) { e2.textContent = t('respRequired'); e2.classList.add('show'); }
+          if (d) d.classList.add('invalid'); if (w) w.classList.add('invalid'); ok = false;
+        } else { if (e2) e2.classList.remove('show'); d.classList.remove('invalid'); if (w) w.classList.remove('invalid'); }
+      }
+      if (el('weightWarn').classList.contains('show')) ok = false;
+    }
+    if (s === 4) {
+      var groups = [
+        {tags:'softSkillTags',err:'softErr',msg:t('skillsErrSoft'),grp:'softGroup'},
+        {tags:'compSkillTags',err:'compErr',msg:t('skillsErrComp'),grp:'compGroup'},
+        {tags:'techSkillTags',err:'techErr',msg:t('skillsErrTech'),grp:'techGroup'}
+      ];
+      groups.forEach(function(g) {
+        var cnt = el(g.tags).querySelectorAll('.skill-tag.selected').length;
+        if (cnt < 3) { var em = el(g.err); if (em) { em.textContent = g.msg; em.classList.add('show'); } var grpEl = el(g.grp); if (grpEl) grpEl.classList.add('invalid'); ok = false; }
+        else { var em2 = el(g.err); if (em2) em2.classList.remove('show'); var grpEl2 = el(g.grp); if (grpEl2) grpEl2.classList.remove('invalid'); }
+      });
+      var engEl = el('englishLevel');
+      if (!engEl.value.trim()) { showErr('englishLevel', t('selectRequired')); ok = false; } else clearErr('englishLevel');
+    }
+    if (!ok) { var fi = document.querySelector('.section-card.active .invalid, .section-card.active .err-msg.show'); if (fi) fi.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    return ok;
+  }
+
+  /* ─── COLLECT DATA ─── */
+  function collectFormData() {
+    function v(id) { var e = el(id); return e ? e.value.trim() : ''; }
+    function getSkills(id) { var arr = []; document.querySelectorAll('#' + id + ' .skill-tag.selected').forEach(function(t2) { arr.push(t2.dataset.value); }); return arr.join(', '); }
+    function getCbs(id) { var arr = []; document.querySelectorAll('#' + id + ' input:checked').forEach(function(cb) { arr.push(cb.value); }); return arr.join(', '); }
+    var resps = [];
+    for (var i = 1; i <= 10; i++) {
+      var d = el('rd-' + i), w = el('rw-' + i);
+      if (d && d.value.trim()) resps.push(d.value.trim() + ' (' + (w ? w.value : '0') + '%)');
+    }
+    return {
+      managerEmail:     v('managerEmail'),
+      jobTitleEn:       v('jobTitleEn'),
+      jobTitleAr:       v('jobTitleAr'),
+      sector:           v('sector'),
+      department:       v('department'),
+      reportsTo:        v('reportsTo'),
+      education:        v('education'),
+      experience:       v('experience'),
+      workLocation:     v('workLocation'),
+      jobPurpose:       v('jobPurpose'),
+      worksWith:        worksWithSel.join(', '),
+      externalContacts: getCbs('externalCbs'),
+      responsibilities: resps.join(' | '),
+      englishLevel:     v('englishLevel'),
+      softSkills:       getSkills('softSkillTags'),
+      computerSkills:   getSkills('compSkillTags'),
+      technicalSkills:  getSkills('techSkillTags'),
+      language:         lang
+    };
+  }
+
+  /* ─── SUBMIT ─── */
+  function submitForm() {
+    if (!validate(4)) return;
+    var btn = el('s5submit');
+    btn.textContent = lang === 'ar' ? '...\u062c\u0627\u0631\u064a \u0627\u0644\u0625\u0631\u0633\u0627\u0644' : 'Submitting...';
+    btn.disabled = true;
+    var data = collectFormData();
+
+const payload = JSON.stringify({
+  action: "submitForm",
+  data: data
+});
+
+fetch(APPS_SCRIPT_URL, {
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "text/plain"
+  },
+  body: payload
+});
+
+btn.disabled = false;
+showSuccess(data);
+
+     }
+
+  /* ─── SUCCESS PAGE ─── */
+  function showSuccess(data) {
+    document.querySelectorAll('.section-card').forEach(function(c) { c.classList.remove('active'); });
+    el('progressFill').style.width = '100%';
+    el('progressLabel').textContent = t('completed');
+    document.querySelectorAll('.step-tab').forEach(function(tab) { tab.classList.remove('active'); tab.classList.add('done'); tab.querySelector('.step-dot').textContent = '\u2713'; });
+    setText('succTitle', t('succTitle')); setText('succSub', t('succSub'));
+    setText('succStatusLabel', t('succStatus')); setText('succStatusText', t('succStatusText'));
+    setText('succWfTitle', t('succWfTitle'));
+    setText('succRestart', t('succRestart')); setText('succPrint', t('succPrint'));
+    var summary = el('succSummary');
+    if (summary) { summary.innerHTML = summItem(t('succLblJob'), data.jobTitleEn || data.jobTitleAr || '\u2014') + summItem(t('succLblSector'), data.sector || '\u2014') + summItem(t('succLblDept'), data.department || '\u2014'); }
+    var wfSteps = el('succWfSteps');
+    if (wfSteps) {
+      var steps = [{k:'succWfA',state:'done'},{k:'succWfB',state:'active'},{k:'succWfC',state:'pending'},{k:'succWfD',state:'pending'}];
+      wfSteps.innerHTML = steps.map(function(s, i) {
+        return '<div class="succ-wf-step"><div class="succ-wf-dot ' + s.state + '">' + (s.state === 'done' ? '\u2713' : i + 1) + '</div><div class="succ-wf-label' + (s.state === 'active' ? ' active' : '') + '">' + t(s.k) + '</div></div>';
+      }).join('');
+    }
+    var ref = 'JA-' + new Date().getFullYear() + '-' + (Math.floor(Math.random() * 9000) + 1000);
+    setText('succRef', t('succRef') + '  |  Ref: ' + ref);
+    el('successCard').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function summItem(lbl, val) {
+    return '<div class="succ-summary-item"><div class="succ-summary-lbl">' + lbl + '</div><div class="succ-summary-val">' + val + '</div></div>';
+  }
+
+  function resetForm() {
+    document.querySelectorAll('input[type=text],input[type=number],input[type=email],textarea').forEach(function(e) { e.value = ''; e.classList.remove('invalid'); });
+    document.querySelectorAll('select').forEach(function(e) { e.selectedIndex = 0; e.classList.remove('invalid'); });
+    document.querySelectorAll('.err-msg,.skills-err').forEach(function(e) { e.classList.remove('show'); });
+    worksWithSel = []; el('deptField').classList.add('hidden');
+    buildResponsibilities(); buildSkills(); el('successCard').classList.remove('active'); showSection(0);
+  }
+
+  /* ─── EVENT WIRING ─── */
+  document.addEventListener('DOMContentLoaded', function() {
+    el('btnEn').addEventListener('click', function() { selectLanguage('en'); });
+    el('btnAr').addEventListener('click', function() { selectLanguage('ar'); });
+    el('btnEn').addEventListener('mouseenter', function() { el('langIntroEn').style.display = 'block'; el('langIntroAr').style.display = 'none'; });
+    el('btnAr').addEventListener('mouseenter', function() { el('langIntroEn').style.display = 'none'; el('langIntroAr').style.display = 'block'; });
+    el('btnEn').addEventListener('mouseleave', function() { el('langIntroEn').style.display = 'block'; el('langIntroAr').style.display = 'block'; });
+    el('btnAr').addEventListener('mouseleave', function() { el('langIntroEn').style.display = 'block'; el('langIntroAr').style.display = 'block'; });
+    el('wfBackBtn').addEventListener('click', backToLang);
+    el('wfStartBtn').addEventListener('click', showForm);
+    el('formBackBtn').addEventListener('click', backToLang);
+    el('sector').addEventListener('change', onSectorChange);
+    el('worksWithBtn').addEventListener('click', function() { toggleMulti(); });
+    el('addRespBtn').addEventListener('click', function() { addResp(false); });
+    el('s1next').addEventListener('click', function() { goNext(0); });
+    el('s2back').addEventListener('click', function() { goBack(1); }); el('s2next').addEventListener('click', function() { goNext(1); });
+    el('s3back').addEventListener('click', function() { goBack(2); }); el('s3next').addEventListener('click', function() { goNext(2); });
+    el('s4back').addEventListener('click', function() { goBack(3); }); el('s4next').addEventListener('click', function() { goNext(3); });
+    el('s5back').addEventListener('click', function() { goBack(4); }); el('s5submit').addEventListener('click', function() { submitForm(); });
+    el('succRestart').addEventListener('click', function() { resetForm(); });
+    el('succPrint').addEventListener('click', function() { window.print(); });
+  });
+
+})();
+</script>
+</body>
+</html>
